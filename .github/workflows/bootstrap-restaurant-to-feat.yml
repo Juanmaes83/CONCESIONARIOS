@@ -19,14 +19,9 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare feature branch
+      - name: Prepare clean feature branch from initial repository commit
         run: |
-          git fetch origin feat/restaurant-clone-concesionarios-base || true
-          if git show-ref --verify --quiet refs/remotes/origin/feat/restaurant-clone-concesionarios-base; then
-            git checkout -B feat/restaurant-clone-concesionarios-base origin/feat/restaurant-clone-concesionarios-base
-          else
-            git checkout -B feat/restaurant-clone-concesionarios-base
-          fi
+          git checkout -B feat/concesionarios-restaurant-clone-base e031a2920e8c67eedb777799fa8f0f60780cfad4
 
       - name: Clone restaurant premium source
         run: |
@@ -102,10 +97,10 @@ jobs:
           - QA visual antes de entrega.
           EOF
 
-      - name: Commit cloned base to feature branch
+      - name: Commit cloned base to clean feature branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "bootstrap: clone restaurant premium base for dealerships" || exit 0
-          git push origin HEAD:feat/restaurant-clone-concesionarios-base --force-with-lease
+          git push origin HEAD:feat/concesionarios-restaurant-clone-base --force
