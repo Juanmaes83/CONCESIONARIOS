@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="Tesla Model Y azul metálico sin fondo">
+  <defs>
+    <linearGradient id="paint" x1="0" x2="1"><stop stop-color="#081633"/><stop offset=".33" stop-color="#17458d"/><stop offset=".7" stop-color="#0d2c64"/><stop offset="1" stop-color="#050d1f"/></linearGradient>
+    <linearGradient id="glass" x1="0" x2="1"><stop stop-color="#101316"/><stop offset=".52" stop-color="#34424c"/><stop offset="1" stop-color="#090b0e"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="34" stdDeviation="24" flood-color="#2b2115" flood-opacity=".2"/></filter>
+  </defs>
+  <ellipse cx="610" cy="430" rx="430" ry="34" fill="#17120d" opacity=".15" filter="url(#shadow)"/>
+  <g filter="url(#shadow)">
+    <path d="M80 365 C105 286 178 243 292 218 C371 148 511 110 661 128 C795 144 872 199 924 261 C1024 270 1107 313 1141 363 L1112 402 L140 402 Z" fill="url(#paint)"/>
+    <path d="M304 221 C388 152 527 124 663 139 C762 151 835 195 885 259 L718 258 C606 252 492 244 350 238 Z" fill="url(#glass)"/>
+    <path d="M343 239 C411 170 525 143 648 145 L640 257 L327 241 Z" fill="#0b0c0e" opacity=".35"/>
+    <path d="M721 258 L892 260 C849 205 778 165 675 145 Z" fill="#0a0b0d" opacity=".42"/>
+    <path d="M94 364 C184 337 298 327 418 330 L1045 332 C1082 337 1115 354 1140 379 L1112 402 L140 402 Z" fill="#071d46" opacity=".58"/>
+    <path d="M82 364 C142 364 210 365 281 367" stroke="#3973ff" stroke-width="5" opacity=".7"/>
+    <path d="M745 282 C804 269 869 267 927 279" stroke="#f4f7ff" stroke-width="8" stroke-linecap="round" opacity=".8"/>
+    <path d="M1002 296 C1048 299 1080 316 1104 340" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" opacity=".76"/>
+    <rect x="425" y="267" width="54" height="13" rx="6" fill="#101217" opacity=".9"/><rect x="552" y="267" width="54" height="13" rx="6" fill="#101217" opacity=".9"/>
+    <g transform="translate(286 396)"><circle r="82" fill="#111"/><circle r="63" fill="#282d34"/><g stroke="#8f99a3" stroke-width="9" stroke-linecap="round"><path d="M0 0 L0 -52"/><path d="M0 0 L45 -25"/><path d="M0 0 L45 25"/><path d="M0 0 L0 52"/><path d="M0 0 L-45 25"/><path d="M0 0 L-45 -25"/></g><circle r="13" fill="#d8dde0"/></g>
+    <g transform="translate(920 396)"><circle r="82" fill="#111"/><circle r="63" fill="#282d34"/><g stroke="#8f99a3" stroke-width="9" stroke-linecap="round"><path d="M0 0 L0 -52"/><path d="M0 0 L45 -25"/><path d="M0 0 L45 25"/><path d="M0 0 L0 52"/><path d="M0 0 L-45 25"/><path d="M0 0 L-45 -25"/></g><circle r="13" fill="#d8dde0"/></g>
+    <path d="M574 232 l22 -18 l22 18" fill="none" stroke="#f4f7ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+  </g>
+</svg>
