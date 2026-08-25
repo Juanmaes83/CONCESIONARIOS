@@ -38,7 +38,7 @@ jobs:
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -R /tmp/restaurant-premium-source/. .
           rm -rf .git/modules || true
-          rm -rf .github/workflows/bootstrap-from-restaurant.yml || true
+          rm -rf .github || true
           mkdir -p docs/concesionarios
           cat > docs/concesionarios/ADAPTATION-BRIEF.md <<'EOF'
           # CONCESIONARIOS — Adaptación desde Restaurante Premium
