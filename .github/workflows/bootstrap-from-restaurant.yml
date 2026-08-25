@@ -12,7 +12,6 @@ permissions:
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, 'bootstrap: clone restaurant premium base') }}
     steps:
       - name: Checkout CONCESIONARIOS branch
         uses: actions/checkout@v4
@@ -31,68 +30,69 @@ jobs:
           cp -R /tmp/restaurant-premium-source/. .
           rm -rf .git/modules || true
           mkdir -p docs/concesionarios
-          cat > docs/concesionarios/ADAPTATION-BRIEF.md <<'EOF'
-          # CONCESIONARIOS — Adaptación desde Restaurante Premium
+          python3 - <<'PY'
+          from pathlib import Path
+          Path('docs/concesionarios').mkdir(parents=True, exist_ok=True)
+          Path('docs/concesionarios/ADAPTATION-BRIEF.md').write_text('''# CONCESIONARIOS — Adaptación desde Restaurante Premium
 
-          ## Objetivo
+## Objetivo
 
-          Este proyecto parte del clon técnico de `WEB-RESTAURACI-N-PREMIUM-DIN-MICA` rama `class7-dish-journey-premium`.
+Este proyecto parte del clon técnico de `WEB-RESTAURACI-N-PREMIUM-DIN-MICA` rama `class7-dish-journey-premium`.
 
-          No se busca construir un restaurante. Se reutiliza la arquitectura didáctica y visual del restaurante para crear una web premium de concesionarios con panel personalizable.
+No se busca construir un restaurante. Se reutiliza la arquitectura didáctica y visual del restaurante para crear una web premium de concesionarios con panel personalizable.
 
-          ## Equivalencias de producto
+## Equivalencias de producto
 
-          - Restaurante / marca gastronómica → concesionario premium.
-          - Platos signature → vehículos destacados.
-          - Dish Journey → Vehicle Journey.
-          - Origen / atmósfera / chef / reserva → diseño / prestaciones / experiencia / cita.
-          - Ficha gastronómica → ficha técnica + emocional del coche.
-          - Reserva mesa → solicitar prueba / contacto comercial.
+- Restaurante / marca gastronómica → concesionario premium.
+- Platos signature → vehículos destacados.
+- Dish Journey → Vehicle Journey.
+- Origen / atmósfera / chef / reserva → diseño / prestaciones / experiencia / cita.
+- Ficha gastronómica → ficha técnica + emocional del coche.
+- Reserva mesa → solicitar prueba / contacto comercial.
 
-          ## Reglas de imagen
+## Reglas de imagen
 
-          - Usar coches premium tipo Tesla como primera línea visual.
-          - Imágenes recortadas, sin fondo o fondo transparente cuando sea posible.
-          - No generar más de 2 imágenes del mismo coche/plano.
-          - Evitar series repetitivas del mismo prompt.
-          - Priorizar variedad real: frontal 3/4, lateral hero, interior, detalle óptica, detalle llanta.
+- Usar coches premium tipo Tesla como primera línea visual.
+- Imágenes recortadas, sin fondo o fondo transparente cuando sea posible.
+- No generar más de 2 imágenes del mismo coche/plano.
+- Evitar series repetitivas del mismo prompt.
+- Priorizar variedad real: frontal 3/4, lateral hero, interior, detalle óptica, detalle llanta.
 
-          ## Próximo bloque de trabajo
+## Próximo bloque de trabajo
 
-          1. Renombrar lenguaje restaurante → concesionario.
-          2. Crear panel personalizado para marca, vehículos, CTAs, imágenes y fichas.
-          3. Sustituir Dish Journey por Vehicle Journey.
-          4. Preparar preset Tesla / concesionario premium.
-          5. Validar visualmente con workflow antes de entregar enlace.
-          EOF
+1. Renombrar lenguaje restaurante → concesionario.
+2. Crear panel personalizado para marca, vehículos, CTAs, imágenes y fichas.
+3. Sustituir Dish Journey por Vehicle Journey.
+4. Preparar preset Tesla / concesionario premium.
+5. Validar visualmente con workflow antes de entregar enlace.
+''', encoding='utf-8')
+          Path('README.md').write_text('''# CONCESIONARIOS
 
-          cat > README.md <<'EOF'
-          # CONCESIONARIOS
+Web premium de concesionarios basada en la arquitectura del proyecto `WEB-RESTAURACI-N-PREMIUM-DIN-MICA`.
 
-          Web premium de concesionarios basada en la arquitectura del proyecto `WEB-RESTAURACI-N-PREMIUM-DIN-MICA`.
+## Estado
 
-          ## Estado
+Base clonada desde Restaurante Premium para iniciar adaptación a concesionarios.
 
-          Base clonada desde Restaurante Premium para iniciar adaptación a concesionarios.
+## Fuente técnica
 
-          ## Fuente técnica
+- Origen: `Juanmaes83/WEB-RESTAURACI-N-PREMIUM-DIN-MICA`
+- Rama origen: `class7-dish-journey-premium`
+- Destino: `Juanmaes83/CONCESIONARIOS`
 
-          - Origen: `Juanmaes83/WEB-RESTAURACI-N-PREMIUM-DIN-MICA`
-          - Rama origen: `class7-dish-journey-premium`
-          - Destino: `Juanmaes83/CONCESIONARIOS`
+## Objetivo
 
-          ## Objetivo
+Crear una web premium para concesionarios con:
 
-          Crear una web premium para concesionarios con:
-
-          - carrusel visual de vehículos;
-          - fichas editables;
-          - panel personalizado;
-          - storytelling por vehículo;
-          - CTA de prueba/contacto;
-          - presets de marca;
-          - QA visual antes de entrega.
-          EOF
+- carrusel visual de vehículos;
+- fichas editables;
+- panel personalizado;
+- storytelling por vehículo;
+- CTA de prueba/contacto;
+- presets de marca;
+- QA visual antes de entrega.
+''', encoding='utf-8')
+          PY
 
       - name: Commit cloned base
         run: |
