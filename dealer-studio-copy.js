@@ -3,6 +3,7 @@
   'use strict';
   const $=s=>document.querySelector(s);const set=(s,t)=>{const e=$(s);if(e)e.textContent=t};
   const textNode=(el,text)=>{if(!el)return;let n=[...el.childNodes].find(x=>x.nodeType===Node.TEXT_NODE);if(!n){n=document.createTextNode('');el.insertBefore(n,el.firstChild||null)}n.nodeValue=text};
+  function labelFor(path,text){const input=$(`[data-path="${path}"]`);if(input)textNode(input.closest('label'),text)}
   function apply(){
     set('[data-panel="brand"] .panel-intro .eyebrow','01 · Brand');set('[data-panel="brand"] .panel-intro h3','NOVA identity');set('[data-panel="brand"] .panel-intro p:nth-of-type(2)','Control the dealership name, palette and logo used across the customer-facing experience.');
     const brandName=$('[data-panel="brand"] label.full');if(brandName)textNode(brandName,'Dealership name ');
@@ -22,9 +23,12 @@
     set('.media-card[data-slot="chef"] strong','EXPERT GUIDANCE · Featured vehicle');set('.media-card[data-slot="chef"] .media-card-head span','Supporting vehicle image for the advice chapter.');
     document.querySelectorAll('.media-spec').forEach((el,i)=>{const copy=['Recommended: 16:9 · full vehicle or cinematic exterior.','Recommended: 4:5 · engineering, body detail or full vehicle.','Recommended: 16:9 · road, cabin or driving context.','Recommended: 4:5 · featured vehicle or consultation visual.'][i];if(copy)el.textContent=copy});
 
+    set('[data-panel="visit"] .panel-intro .eyebrow','05 · Showroom & conversion');
+    set('[data-panel="visit"] .panel-intro h3','Showroom, contact and test drives');
     set('[data-panel="visit"] .panel-intro p:nth-of-type(2)','Edit the commercial close, showroom information and test-drive CTA. A booking URL can connect directly to the sales or CRM flow.');
-    const booking=$('[data-path="visit.bookingUrl"]');if(booking)textNode(booking.closest('label'),'Test-drive booking URL ');
-    const service=$('[data-path="visit.service"]');if(service)textNode(service.closest('label'),'Opening hours ');
+    set('[data-panel="visit"] .panel-preview','Preview showroom & test-drive block ↗');
+    labelFor('visit.kicker','Showroom · Kicker ');labelFor('visit.title','Showroom · Headline ');labelFor('visit.cta','Test-drive CTA ');labelFor('visit.bookingUrl','Test-drive booking URL ');
+    labelFor('visit.addressLabel','Showroom label ');labelFor('visit.address','Showroom address ');labelFor('visit.serviceLabel','Opening-hours label ');labelFor('visit.service','Opening hours ');labelFor('visit.contactLabel','Contact label ');labelFor('visit.contact','Sales contact ');
 
     set('[data-panel="project"] .panel-intro .eyebrow','07 · Project');set('[data-panel="project"] .panel-intro h3','Project state and portability');set('[data-panel="project"] .panel-intro p:nth-of-type(2)','Save, restore, preview and export the complete NOVA Motors dealership configuration.');
     set('[data-panel="project"] .project-card:last-child h4','Restore NOVA Motors demo');set('[data-panel="project"] .project-card:last-child p','Remove local project/media and restore the six-vehicle NOVA Motors demo.');
