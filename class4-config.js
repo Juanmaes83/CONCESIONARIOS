@@ -1,28 +1,64 @@
-/* DEALER PREMIUM — source-of-truth configuration, preserving the Restaurant Studio schema for compatibility. */
+/* NOVA MOTORS — dealership source of truth. Donor field names remain only for runtime compatibility. */
 window.RestaurantDefaults={
-  id:'dealer-premium-class2',schemaVersion:4,status:'draft',
+  id:'dealer-premium-class3',schemaVersion:4,status:'draft',
   brand:{name:'NOVA MOTORS',logoText:'NOVA MOTORS',accent:'#d8ff4f',ink:'#0a0a0a',paper:'#f2f0eb',fontDisplay:'Italiana',fontBody:'DM Sans'},
-  header:{links:[['Models','#signature'],['Philosophy','#story'],['Experience','#experience'],['Visit','#visit']],studioLabel:'Dealer Studio',reserveLabel:'Book a drive'},
-  hero:{kicker:'Alicante · Premium electric mobility',line1:'NOVA',line2:'moves differently.',body:'A premium dealership experience built around the car, not around a catalogue. Six vehicles. One continuous stage.',cta:'Explore the models',stamp:'VEHICLE SHOWCASE · DEALER STUDIO ·',scroll:'SCROLL TO ENTER'},
-  philosophy:{index:'01 / Philosophy',title:'The vehicle enters the scene as an object of desire, not as another card in a grid.',body1:'The dealership keeps the same premium architecture as the restaurant donor: editorial composition, controlled media, persistent Studio and product-led motion.',body2:'We replace the plate with the vehicle while preserving the original DNA: one active product, visual hierarchy, direct manipulation, detail view and project-level customisation.'},
-  orbital:{index:'02 / Featured vehicles',kicker:'Drag · wheel · swipe · arrows',title:'The Vehicle Showcase',explore:'Discover vehicle'},
-  origin:{index:'03 / Design',title:'Designed around the journey.',body:'Every model combines proportion, aerodynamics and technology into a coherent object. The interface treats specifications as part of the story, not as secondary data.',caption:'Design · Engineering · Detail'},
-  atmosphere:{index:'04 / Experience',title:'Electric becomes emotional.',caption:'Road · cabin · silence',body:'Acceleration, range, material quality and software become one experience before the first kilometre.',cta:'Book a test drive →'},
-  chef:{index:'05 / Guidance',title:'Advice without noise.',quote:'“The best car is not the most expensive one. It is the one that fits the way you actually move.”',badges:['Independent guidance','Transparent comparison','Test-drive first']},
-  visit:{kicker:'Alicante · Mon — Sat',title:'Take the wheel.',cta:'Book a test drive',addressLabel:'Showroom',address:'Alicante · Costa Blanca',serviceLabel:'Opening',service:'09:30 — 19:30',contactLabel:'Contact',contact:'hello@novamotors.demo',bookingUrl:'#'},
-  footer:{left:'NOVA MOTORS',center:'Premium Dealer Studio',right:'Interactive dealership prototype'},
+  header:{links:[['Models','#signature'],['Why NOVA','#story'],['Experience','#experience'],['Showroom','#visit']],studioLabel:'Dealer Studio',reserveLabel:'Book a test drive'},
+  hero:{
+    kicker:'Alicante · Premium electric vehicles',
+    line1:'DRIVE',
+    line2:'what moves you.',
+    body:'Six distinctive electric cars. One place to compare them properly, understand what changes from model to model and decide from the driver’s seat.',
+    cta:'Explore the collection',
+    stamp:'DESIGN · PERFORMANCE · RANGE ·',
+    scroll:'DISCOVER THE COLLECTION'
+  },
+  philosophy:{
+    index:'01 / Why NOVA',
+    title:'The right car is the one that makes sense before you even turn the key.',
+    body1:'At NOVA, the conversation starts with how you drive: city or motorway, family or solo, comfort or performance, daily range or long-distance freedom.',
+    body2:'Then we compare the cars that genuinely fit. Clear specifications, meaningful differences and a test drive before the decision.'
+  },
+  orbital:{index:'02 / Collection',kicker:'Drag · wheel · swipe · arrows',title:'Choose your next drive.',explore:'View vehicle'},
+  origin:{
+    index:'03 / Design & engineering',
+    title:'Every proportion has a purpose.',
+    body:'Aerodynamics, packaging, battery placement and cabin architecture shape more than the silhouette. They determine efficiency, stability, space and the way a car feels from the first metre.',
+    caption:'AERODYNAMICS · MATERIALS · ENGINEERING'
+  },
+  atmosphere:{
+    index:'04 / Driving experience',
+    title:'Performance you feel before you measure it.',
+    caption:'ACCELERATION · SILENCE · CONTROL',
+    body:'Instant torque is only the beginning. Steering response, ride quality, visibility, braking confidence, software and cabin refinement decide whether a car works for you every day.',
+    cta:'Book a test drive →'
+  },
+  chef:{
+    index:'05 / Expert guidance',
+    title:'Compare the differences that actually matter.',
+    quote:'“Range, power and price are easy to print. The real job is understanding which combination fits the way you live and drive.”',
+    badges:['Side-by-side comparison','Transparent specifications','Test-drive first']
+  },
+  visit:{
+    kicker:'Alicante · Monday — Saturday',
+    title:'The next decision belongs behind the wheel.',
+    cta:'Book a test drive',
+    addressLabel:'Showroom',address:'Alicante · Costa Blanca',
+    serviceLabel:'Opening hours',service:'09:30 — 19:30',
+    contactLabel:'Sales & test drives',contact:'hello@novamotors.demo',bookingUrl:'#'
+  },
+  footer:{left:'NOVA MOTORS',center:'Electric vehicles · Alicante',right:'Compare · Drive · Decide'},
   motion:{orbitalStyle:'dealer',text:{hero:'cinematic',philosophy:'line',origin:'soft',atmosphere:'editorial',chef:'mask',visit:'rise'},media:{hero:'still',origin:'still',atmosphere:'still',chef:'still'}},
   media:{hero:{type:'image',url:'',fit:'cover',position:'50% 50%'},origin:{type:'image',url:'',fit:'cover',position:'50% 50%'},atmosphere:{type:'image',url:'',fit:'cover',position:'50% 50%'},chef:{type:'image',url:'',fit:'cover',position:'50% 50%'}},
   dishes:[
-    {id:'vehicle-01',name:'Model S',meta:'Dual Motor · 634 km range · AWD',short:'Long-range electric grand tourer with instant response, low drag and a cabin built around distance.',price:'From €94,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_3386a1a4-fbf8-450b-80f9-3120cb013f96.png',ingredients:'634 km WLTP · AWD · 5 seats · fast charging',origin:'Premium electric fastback',technique:'0–100 km/h from 3.2 s',pairing:'Long distance · executive travel',note:'The flagship: low, fast and designed to cover distance without drama.',allergens:'Test drive recommended before configuration',enabled:true},
-    {id:'vehicle-02',name:'Model X',meta:'Dual Motor · 576 km range · AWD',short:'A spacious electric SUV with panoramic visibility, serious performance and room for the whole journey.',price:'From €99,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_48afab8a-ae05-47f4-8159-962ab4a47430.png',ingredients:'576 km WLTP · AWD · up to 7 seats · fast charging',origin:'Premium electric SUV',technique:'0–100 km/h from 3.9 s',pairing:'Family · travel · space',note:'The most versatile car in the line-up when space matters as much as performance.',allergens:'Configuration varies by seating layout',enabled:true},
-    {id:'vehicle-03',name:'Model Y',meta:'Long Range · 600 km class · AWD',short:'The balanced crossover: efficient packaging, everyday usability and the same clean electric response.',price:'From €48,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_a8cd3fe5-5e51-4dac-9ba1-b790ae1b7ddd.png',ingredients:'Long Range · AWD · 5 seats · fast charging',origin:'Electric crossover',technique:'Low centre of gravity · instant torque',pairing:'Daily use · family · commuting',note:'The easiest point of entry when one car has to do almost everything.',allergens:'Range depends on version and wheel choice',enabled:true},
-    {id:'vehicle-04',name:'Model 3 Performance',meta:'Performance · AWD · sport chassis',short:'A compact electric sports sedan tuned for response, agility and everyday usability.',price:'From €57,490',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_42e21187-79f3-4ae0-87a3-8a085300b009.png',ingredients:'AWD · adaptive damping · sport seats · fast charging',origin:'Performance electric sedan',technique:'0–100 km/h in the low-3-second class',pairing:'Driver focus · daily performance',note:'The sharpest everyday car in the range: compact, immediate and deliberately understated.',allergens:'Performance figures vary by market and configuration',enabled:true},
-    {id:'vehicle-05',name:'Cybertruck',meta:'Stainless steel · AWD · utility',short:'A radical electric utility vehicle built around durability, load space and unmistakable geometry.',price:'Market dependent',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_1d9402df-f6d2-4ab4-8336-36a07550c0df.png',ingredients:'Stainless-steel body · AWD · utility bed · high ground clearance',origin:'Electric utility vehicle',technique:'Steer-by-wire · high-output electric drivetrain',pairing:'Adventure · utility · statement design',note:'The outlier: not designed to disappear into traffic, but to redefine what an electric utility vehicle can look like.',allergens:'Availability and homologation depend on market',enabled:true},
-    {id:'vehicle-06',name:'Roadster',meta:'Concept · electric supercar · 2+2',short:'A low electric sports car concept focused on extreme acceleration, compact proportions and long-range ambition.',price:'Future model',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_ef284aac-ec4a-430d-bdb4-7aeec8b6cc4b.png',ingredients:'2+2 layout · low-drag body · performance battery architecture',origin:'Electric sports-car concept',technique:'High-performance all-electric drivetrain',pairing:'Halo product · design · performance',note:'The emotional endpoint of the collection: low, clean and intentionally uncompromised.',allergens:'Concept/future model; final production specification may change',enabled:true}
+    {id:'vehicle-01',name:'Model S',meta:'Dual Motor · 634 km range · AWD',short:'A low, long-range electric grand tourer built for effortless motorway pace, instant response and quiet distance.',price:'From €94,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_3386a1a4-fbf8-450b-80f9-3120cb013f96.png',ingredients:'634 km WLTP · AWD · 5 seats · fast charging',origin:'Premium electric fastback',technique:'0–100 km/h from 3.2 s',pairing:'Long-distance travel · executive use',note:'Choose it when range, refinement and effortless speed matter more than SUV packaging.',allergens:'Confirm current market specification and availability before order',enabled:true},
+    {id:'vehicle-02',name:'Model X',meta:'Dual Motor · 576 km range · AWD',short:'A large electric SUV combining serious acceleration, panoramic visibility and flexible space for longer journeys.',price:'From €99,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_48afab8a-ae05-47f4-8159-962ab4a47430.png',ingredients:'576 km WLTP · AWD · up to 7 seats · fast charging',origin:'Premium electric SUV',technique:'0–100 km/h from 3.9 s',pairing:'Family travel · passengers · luggage',note:'The strongest fit when you need genuine space without giving up electric performance.',allergens:'Seating layouts and specifications vary by market',enabled:true},
+    {id:'vehicle-03',name:'Model Y',meta:'Long Range · 600 km class · AWD',short:'A versatile electric crossover that balances usable space, efficiency, easy access and everyday performance.',price:'From €48,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_a8cd3fe5-5e51-4dac-9ba1-b790ae1b7ddd.png',ingredients:'Long Range · AWD · 5 seats · fast charging',origin:'Electric crossover',technique:'Low centre of gravity · instant torque',pairing:'Daily use · family · commuting',note:'A convincing all-rounder when one car has to cover commuting, family use and longer trips.',allergens:'Range changes with version, wheels, weather and driving conditions',enabled:true},
+    {id:'vehicle-04',name:'Model 3 Performance',meta:'Performance · AWD · sport chassis',short:'A compact electric sports saloon tuned for sharper response, stronger acceleration and everyday usability.',price:'From €57,490',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_42e21187-79f3-4ae0-87a3-8a085300b009.png',ingredients:'AWD · adaptive damping · sport seats · fast charging',origin:'Performance electric saloon',technique:'0–100 km/h in the low-3-second class',pairing:'Driver focus · daily performance',note:'The choice for drivers who want the smallest, most responsive performance car in the collection.',allergens:'Performance figures vary by market, tyres and configuration',enabled:true},
+    {id:'vehicle-05',name:'Cybertruck',meta:'Stainless steel · AWD · utility',short:'A radically shaped electric utility vehicle focused on durability, cargo capacity and unconventional engineering.',price:'Market dependent',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_1d9402df-f6d2-4ab4-8336-36a07550c0df.png',ingredients:'Stainless-steel body · AWD · utility bed · high ground clearance',origin:'Electric utility vehicle',technique:'Steer-by-wire · high-output electric drivetrain',pairing:'Utility · adventure · statement design',note:'Consider it for capability and character first; its size, format and market availability make it a very different ownership proposition.',allergens:'Availability and homologation depend on market',enabled:true},
+    {id:'vehicle-06',name:'Roadster',meta:'Concept · electric supercar · 2+2',short:'A low electric sports-car concept built around extreme acceleration, compact proportions and halo-car ambition.',price:'Future model',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_ef284aac-ec4a-430d-bdb4-7aeec8b6cc4b.png',ingredients:'2+2 layout · low-drag body · performance battery architecture',origin:'Electric sports-car concept',technique:'High-performance all-electric drivetrain',pairing:'Performance · design · halo product',note:'Treat it as the emotional extreme of the range rather than a direct alternative to the everyday models.',allergens:'Future/concept model; final production specification may change',enabled:true}
   ]
 };
-/* Isolate persistence from the donor restaurant while reusing its proven Store implementation. */
-(() => {if(!window.RestaurantStore)return;const KEY='dealer-premium-class2',S=window.RestaurantStore,save=S.saveProject.bind(S),load=S.loadProject.bind(S),clear=S.clearProject.bind(S);S.saveProject=project=>save({...project,id:KEY});S.loadProject=()=>load(KEY);S.clearProject=()=>clear(KEY);})();
-/* Load Dealer-specific visuals/assets/runtime without replacing the donor HTML or its persistence engine. */
+/* Isolate this dealership project from older restaurant/dealer browser state while reusing the proven Store. */
+(() => {if(!window.RestaurantStore)return;const KEY='dealer-premium-class3',S=window.RestaurantStore,save=S.saveProject.bind(S),load=S.loadProject.bind(S),clear=S.clearProject.bind(S);S.saveProject=project=>save({...project,id:KEY});S.loadProject=()=>load(KEY);S.clearProject=()=>clear(KEY);})();
+/* Load the dealership skin and motion layer without replacing the donor HTML/Store/Studio architecture. */
 (() => {const link=document.createElement('link');link.rel='stylesheet';link.href='dealer-premium.css';document.head.appendChild(link);['dealer-assets.js','dealer-motion-bridge.js','dealer-runtime.js'].forEach(src=>{const s=document.createElement('script');s.src=src;s.async=false;document.head.appendChild(s)});})();
