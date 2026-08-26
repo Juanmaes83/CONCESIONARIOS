@@ -3,51 +3,15 @@ window.RestaurantDefaults={
   id:'dealer-premium-class3',schemaVersion:4,status:'draft',
   brand:{name:'NOVA MOTORS',logoText:'NOVA MOTORS',accent:'#d8ff4f',ink:'#0a0a0a',paper:'#f2f0eb',fontDisplay:'Italiana',fontBody:'DM Sans'},
   header:{links:[['Models','#signature'],['Why NOVA','#story'],['Experience','#experience'],['Showroom','#visit']],studioLabel:'Dealer Studio',reserveLabel:'Book a test drive'},
-  hero:{
-    kicker:'Alicante · Premium electric vehicles',
-    line1:'DRIVE',
-    line2:'what moves you.',
-    body:'Six distinctive electric cars. One place to compare them properly, understand what changes from model to model and decide from the driver’s seat.',
-    cta:'Explore the collection',
-    stamp:'DESIGN · PERFORMANCE · RANGE ·',
-    scroll:'DISCOVER THE COLLECTION'
-  },
-  philosophy:{
-    index:'01 / Why NOVA',
-    title:'The right car is the one that makes sense before you even turn the key.',
-    body1:'At NOVA, the conversation starts with how you drive: city or motorway, family or solo, comfort or performance, daily range or long-distance freedom.',
-    body2:'Then we compare the cars that genuinely fit. Clear specifications, meaningful differences and a test drive before the decision.'
-  },
+  hero:{kicker:'Alicante · Premium electric vehicles',line1:'DRIVE',line2:'what moves you.',body:'Six distinctive electric cars. One place to compare them properly, understand what changes from model to model and decide from the driver’s seat.',cta:'Explore the collection',stamp:'DESIGN · PERFORMANCE · RANGE ·',scroll:'DISCOVER THE COLLECTION'},
+  philosophy:{index:'01 / Why NOVA',title:'The right car is the one that makes sense before you even turn the key.',body1:'At NOVA, the conversation starts with how you drive: city or motorway, family or solo, comfort or performance, daily range or long-distance freedom.',body2:'Then we compare the cars that genuinely fit. Clear specifications, meaningful differences and a test drive before the decision.'},
   orbital:{index:'02 / Collection',kicker:'Drag · wheel · swipe · arrows',title:'Choose your next drive.',explore:'View vehicle'},
-  origin:{
-    index:'03 / Design & engineering',
-    title:'Every proportion has a purpose.',
-    body:'Aerodynamics, packaging, battery placement and cabin architecture shape more than the silhouette. They determine efficiency, stability, space and the way a car feels from the first metre.',
-    caption:'AERODYNAMICS · MATERIALS · ENGINEERING'
-  },
-  atmosphere:{
-    index:'04 / Driving experience',
-    title:'Performance you feel before you measure it.',
-    caption:'ACCELERATION · SILENCE · CONTROL',
-    body:'Instant torque is only the beginning. Steering response, ride quality, visibility, braking confidence, software and cabin refinement decide whether a car works for you every day.',
-    cta:'Book a test drive →'
-  },
-  chef:{
-    index:'05 / Expert guidance',
-    title:'Compare the differences that actually matter.',
-    quote:'“Range, power and price are easy to print. The real job is understanding which combination fits the way you live and drive.”',
-    badges:['Side-by-side comparison','Transparent specifications','Test-drive first']
-  },
-  visit:{
-    kicker:'Alicante · Monday — Saturday',
-    title:'The next decision belongs behind the wheel.',
-    cta:'Book a test drive',
-    addressLabel:'Showroom',address:'Alicante · Costa Blanca',
-    serviceLabel:'Opening hours',service:'09:30 — 19:30',
-    contactLabel:'Sales & test drives',contact:'hello@novamotors.demo',bookingUrl:'#'
-  },
+  origin:{index:'03 / Design & engineering',title:'Every proportion has a purpose.',body:'Aerodynamics, packaging, battery placement and cabin architecture shape more than the silhouette. They determine efficiency, stability, space and the way a car feels from the first metre.',caption:'AERODYNAMICS · MATERIALS · ENGINEERING'},
+  atmosphere:{index:'04 / Driving experience',title:'Performance you feel before you measure it.',caption:'ACCELERATION · SILENCE · CONTROL',body:'Instant torque is only the beginning. Steering response, ride quality, visibility, braking confidence, software and cabin refinement decide whether a car works for you every day.',cta:'Book a test drive →'},
+  chef:{index:'05 / Expert guidance',title:'Compare the differences that actually matter.',quote:'“Range, power and price are easy to print. The real job is understanding which combination fits the way you live and drive.”',badges:['Side-by-side comparison','Transparent specifications','Test-drive first']},
+  visit:{kicker:'Alicante · Monday — Saturday',title:'The next decision belongs behind the wheel.',cta:'Book a test drive',addressLabel:'Showroom',address:'Alicante · Costa Blanca',serviceLabel:'Opening hours',service:'09:30 — 19:30',contactLabel:'Sales & test drives',contact:'hello@novamotors.demo',bookingUrl:'#'},
   footer:{left:'NOVA MOTORS',center:'Electric vehicles · Alicante',right:'Compare · Drive · Decide'},
-  motion:{orbitalStyle:'dealer',text:{hero:'cinematic',philosophy:'line',origin:'soft',atmosphere:'editorial',chef:'mask',visit:'rise'},media:{hero:'still',origin:'still',atmosphere:'still',chef:'still'}},
+  motion:{orbitalStyle:'dealer',dishJourney:false,text:{hero:'cinematic',philosophy:'line',origin:'soft',atmosphere:'editorial',chef:'mask',visit:'rise'},media:{hero:'still',origin:'still',atmosphere:'still',chef:'still'}},
   media:{hero:{type:'image',url:'',fit:'cover',position:'50% 50%'},origin:{type:'image',url:'',fit:'cover',position:'50% 50%'},atmosphere:{type:'image',url:'',fit:'cover',position:'50% 50%'},chef:{type:'image',url:'',fit:'cover',position:'50% 50%'}},
   dishes:[
     {id:'vehicle-01',name:'Model S',meta:'Dual Motor · 634 km range · AWD',short:'A low, long-range electric grand tourer built for effortless motorway pace, instant response and quiet distance.',price:'From €94,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_3386a1a4-fbf8-450b-80f9-3120cb013f96.png',ingredients:'634 km WLTP · AWD · 5 seats · fast charging',origin:'Premium electric fastback',technique:'0–100 km/h from 3.2 s',pairing:'Long-distance travel · executive use',note:'Choose it when range, refinement and effortless speed matter more than SUV packaging.',allergens:'Confirm current market specification and availability before order',enabled:true},
@@ -58,7 +22,5 @@ window.RestaurantDefaults={
     {id:'vehicle-06',name:'Roadster',meta:'Concept · electric supercar · 2+2',short:'A low electric sports-car concept built around extreme acceleration, compact proportions and halo-car ambition.',price:'Future model',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_ef284aac-ec4a-430d-bdb4-7aeec8b6cc4b.png',ingredients:'2+2 layout · low-drag body · performance battery architecture',origin:'Electric sports-car concept',technique:'High-performance all-electric drivetrain',pairing:'Performance · design · halo product',note:'Treat it as the emotional extreme of the range rather than a direct alternative to the everyday models.',allergens:'Future/concept model; final production specification may change',enabled:true}
   ]
 };
-/* Isolate this dealership project from older restaurant/dealer browser state while reusing the proven Store. */
 (() => {if(!window.RestaurantStore)return;const KEY='dealer-premium-class3',S=window.RestaurantStore,save=S.saveProject.bind(S),load=S.loadProject.bind(S),clear=S.clearProject.bind(S);S.saveProject=project=>save({...project,id:KEY});S.loadProject=()=>load(KEY);S.clearProject=()=>clear(KEY);})();
-/* Load the dealership skin and motion layer without replacing the donor HTML/Store/Studio architecture. */
 (() => {const link=document.createElement('link');link.rel='stylesheet';link.href='dealer-premium.css';document.head.appendChild(link);['dealer-assets.js','dealer-motion-bridge.js','dealer-runtime.js'].forEach(src=>{const s=document.createElement('script');s.src=src;s.async=false;document.head.appendChild(s)});})();
