@@ -4,7 +4,7 @@
   if(!window.gsap||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const shell=document.querySelector('.orbit-shell'),stage=document.querySelector('#orbit-stage');
   if(!shell||!stage)return;
-  const isElegant=()=>document.documentElement.dataset.orbitalMotion!=='urban';
+  const isElegant=()=>document.documentElement.dataset.orbitalMotion!=='urban'&&document.documentElement.dataset.orbitalMotion!=='dealer';
   const detailIsOpen=()=>document.documentElement.dataset.dishDetail==='open';
   let lastDance=0,dragStartX=null,breathTween=null,breathTimer=null;
   const dishes=()=>[...stage.querySelectorAll('.orbit-dish')];
