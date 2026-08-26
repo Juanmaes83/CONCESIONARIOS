@@ -46,7 +46,8 @@ try{
   check('Dealer Studio open',await page.locator('#studio').getAttribute('aria-hidden')==='false');
   check('Vehicles tab',(await page.locator('.studio-nav button[data-panel="dishes"]').innerText()).includes('Vehicles'));
   await page.click('.studio-nav button[data-panel="dishes"]');await page.waitForTimeout(180);
-  check('six vehicles in Studio',await page.locator('#studio-dish-list').children().count()===6,String(await page.locator('#studio-dish-list').children().count()));
+  const studioVehicleCount=await page.locator('#studio-dish-list > *').count();
+  check('six vehicles in Studio',studioVehicleCount===6,String(studioVehicleCount));
   await page.click('.studio-nav button[data-panel="motion"]');await page.waitForTimeout(180);
   check('Vehicle Track preset',await page.locator('#motion-orbital-style').inputValue()==='dealer',await page.locator('#motion-orbital-style').inputValue());
   await page.screenshot({path:'qa/dealer-04-studio.png',fullPage:false});
