@@ -1,0 +1,40 @@
+/* NOVA MOTORS — premium dealership skin layered over the approved restaurant architecture. */
+:root{--dealer-paper:#f2f0eb;--dealer-ink:#11110f;--dealer-line:rgba(17,17,15,.16);--dealer-muted:rgba(17,17,15,.58)}
+html[data-dealer-mode="true"] body{background:var(--dealer-paper)}
+html[data-dealer-mode="true"] .topbar{mix-blend-mode:normal}
+html[data-dealer-mode="true"] .orbital-section{position:relative;min-height:100vh;background:var(--dealer-paper);color:var(--dealer-ink);overflow:hidden;padding-bottom:5rem}
+html[data-dealer-mode="true"] .orbital-section::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.5),transparent 42%),radial-gradient(circle at 50% 62%,rgba(255,255,255,.65),transparent 42%);pointer-events:none}
+html[data-dealer-mode="true"] .orbital-top{position:relative;z-index:15;color:var(--dealer-ink)}
+html[data-dealer-mode="true"] .orbital-section .light{color:var(--dealer-muted)}
+html[data-dealer-mode="true"] .orbital-heading .kicker{color:var(--dealer-muted)}
+html[data-dealer-mode="true"] .orbit-shell{height:58vh;min-height:440px;overflow:hidden;border:0;isolation:isolate;cursor:grab;touch-action:pan-y}
+html[data-dealer-mode="true"] .orbit-shell:active{cursor:grabbing}
+html[data-dealer-mode="true"] .orbit-ring,html[data-dealer-mode="true"] .orbit-glow,html[data-dealer-mode="true"] .orbit-center-mark{display:none!important}
+html[data-dealer-mode="true"] .orbit-stage{position:absolute;inset:0;overflow:visible}
+html[data-dealer-mode="true"] .orbit-dish{position:absolute!important;left:50%!important;top:54%!important;width:min(58vw,900px)!important;height:min(33vw,520px)!important;background:transparent!important;border:0!important;padding:0!important;transform-origin:50% 78%;will-change:transform,opacity,filter}
+html[data-dealer-mode="true"] .orbit-dish img{width:100%!important;height:100%!important;object-fit:contain!important;filter:none;pointer-events:none;user-select:none;display:block}
+html[data-dealer-mode="true"] .dish-copy{position:relative;z-index:16;color:var(--dealer-ink);max-width:33rem;margin-top:-1.2rem;transition:opacity .24s ease,transform .24s ease}
+html[data-dealer-mode="true"] .dish-copy[data-transitioning="true"]{opacity:.06;transform:translateY(8px)}
+html[data-dealer-mode="true"] .dish-copy .kicker{color:var(--dealer-muted)}
+html[data-dealer-mode="true"] .dish-copy .display{font-size:clamp(2.6rem,5vw,6rem);line-height:.92;margin:.2rem 0 .8rem;color:var(--dealer-ink)}
+html[data-dealer-mode="true"] .dish-copy>p:not(.kicker){color:var(--dealer-muted);max-width:35rem}
+html[data-dealer-mode="true"] .explore{color:var(--dealer-ink);border-color:var(--dealer-line)}
+html[data-dealer-mode="true"] .orbit-controls{position:relative;z-index:18;color:var(--dealer-ink)}
+html[data-dealer-mode="true"] .orbit-controls .circle-btn{color:var(--dealer-ink);border-color:var(--dealer-line);background:rgba(255,255,255,.34);backdrop-filter:blur(12px)}
+.dealer-ghost-index{position:absolute;z-index:1;left:50%;top:47%;transform:translate(-50%,-50%);font-family:Italiana,serif;font-size:clamp(15rem,42vw,48rem);line-height:.72;color:rgba(20,20,18,.055);letter-spacing:-.09em;pointer-events:none;user-select:none}
+.dealer-hotspot{position:absolute;z-index:14;left:64%;top:48%;width:58px;height:58px;border:1px solid rgba(17,17,15,.38);border-radius:50%;display:grid;place-items:center;background:rgba(242,240,235,.56);backdrop-filter:blur(8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.dealer-hotspot::before,.dealer-hotspot::after{content:"";position:absolute;background:rgba(17,17,15,.6)}
+.dealer-hotspot::before{width:15px;height:1px}.dealer-hotspot::after{height:15px;width:1px}
+.dealer-hotspot span{position:absolute;top:69px;white-space:nowrap;text-transform:uppercase;letter-spacing:.16em;font-size:.58rem;color:var(--dealer-muted)}
+.dealer-progress{position:absolute;z-index:17;right:5vw;bottom:4rem;display:flex;align-items:center;gap:8px}
+.dealer-progress button{width:38px;height:3px;border:0;padding:0;background:rgba(17,17,15,.18);cursor:pointer;transition:width .35s ease,background .35s ease}
+.dealer-progress button[aria-current="true"]{width:74px;background:var(--dealer-ink)}
+html[data-dealer-mode="true"] .detail-copy h4{font-family:DM Sans,sans-serif;text-transform:uppercase;letter-spacing:.15em;font-size:.68rem;color:rgba(255,255,255,.48)}
+html[data-dealer-mode="true"] .detail-reserve{background:var(--accent);color:#111}
+/* Dealer Studio keeps the donor controls and persistence, changing only vocabulary and visual emphasis. */
+html[data-dealer-mode="true"] .studio{--studio-accent:var(--accent)}
+html[data-dealer-mode="true"] .studio-titleline small{letter-spacing:.14em}
+html[data-dealer-mode="true"] .studio-nav button[data-panel="dishes"]::after{content:" VEHICLES";font-size:.56rem;opacity:.45;margin-left:.25rem}
+@media(max-width:900px){html[data-dealer-mode="true"] .orbit-shell{height:52vh;min-height:390px}html[data-dealer-mode="true"] .orbit-dish{width:min(76vw,720px)!important;height:min(48vw,440px)!important}.dealer-hotspot{left:70%;top:51%}.dealer-progress{right:1.4rem;bottom:3rem}}
+@media(max-width:620px){html[data-dealer-mode="true"] .orbital-section{min-height:92vh}html[data-dealer-mode="true"] .orbit-shell{height:44vh;min-height:320px}html[data-dealer-mode="true"] .orbit-dish{width:88vw!important;height:58vw!important;top:52%!important}.dealer-ghost-index{font-size:58vw;top:45%}.dealer-hotspot{width:44px;height:44px;left:73%;top:46%}.dealer-hotspot span{display:none}.dealer-progress{bottom:2rem}.dish-copy{padding-right:1rem}}
+@media(prefers-reduced-motion:reduce){.dealer-hotspot,.dealer-progress button,html[data-dealer-mode="true"] .dish-copy{transition:none!important}}
