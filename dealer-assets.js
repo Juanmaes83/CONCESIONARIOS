@@ -1,4 +1,4 @@
-/* NOVA MOTORS — deterministic Dealer bootstrap + permanent transparent media mapping. */
+/* NOVA MOTORS — deterministic Dealer bootstrap + repository vehicle media mapping. */
 (() => {
   'use strict';
   const loadDealerModule=(src,key)=>{
@@ -7,16 +7,23 @@
   };
   loadDealerModule('dealer-content-guard.js','dealer-content-guard');
   loadDealerModule('dealer-studio-copy.js','dealer-studio-copy');
-  loadDealerModule('dealer-drag-guard.js','dealer-drag-guard');
   document.documentElement.dataset.dealerBootstrap='complete';
   const D=window.RestaurantDefaults;if(!D)return;
-  const transparent={
-    modelS:'assets/vehicles/nova/model-s-red.webp',modelX:'assets/vehicles/nova/model-x-white.webp',modelY:'assets/vehicles/nova/model-y-blue.webp',
-    model3:'https://d2ol7oe51mr4n9.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/e130868a-3e06-44c8-a440-6a36bc316ca7.png',
-    cybertruck:'https://d2ol7oe51mr4n9.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/8ed7f8cc-2ed5-492a-b306-11b41c057e14.png',
-    roadster:'https://d2ol7oe51mr4n9.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/51f718ba-c607-4df4-bfc7-4e360b288502.png'
-  };
-  if(D.media){D.media.hero={type:'image',url:transparent.modelS,fit:'contain',position:'72% 54%'};D.media.origin={type:'image',url:transparent.modelY,fit:'contain',position:'50% 58%'};D.media.atmosphere={type:'image',url:transparent.modelX,fit:'contain',position:'50% 56%'};D.media.chef={type:'image',url:transparent.modelS,fit:'contain',position:'50% 57%'}}
-  const map=[transparent.modelS,transparent.modelX,transparent.modelY,transparent.model3,transparent.cybertruck,transparent.roadster];(D.dishes||[]).forEach((d,i)=>{if(map[i])d.image=map[i]});
-  document.documentElement.dataset.dealerAssets='permanent-alpha';
+  const VEHICLES=[
+    'imagenes/hf_20260826_072108_3386a1a4-fbf8-450b-80f9-3120cb013f96.png',
+    'imagenes/hf_20260826_072108_48afab8a-ae05-47f4-8159-962ab4a47430.png',
+    'imagenes/hf_20260826_072108_a8cd3fe5-5e51-4dac-9ba1-b790ae1b7ddd.png',
+    'imagenes/hf_20260826_082019_42e21187-79f3-4ae0-87a3-8a085300b009.png',
+    'imagenes/hf_20260826_082019_1d9402df-f6d2-4ab4-8336-36a07550c0df.png',
+    'imagenes/hf_20260826_082019_ef284aac-ec4a-430d-bdb4-7aeec8b6cc4b.png'
+  ];
+  if(D.media){
+    D.media.hero={type:'image',url:VEHICLES[0],fit:'contain',position:'72% 54%'};
+    D.media.origin={type:'image',url:VEHICLES[4],fit:'contain',position:'50% 58%'};
+    D.media.atmosphere={type:'image',url:VEHICLES[1],fit:'contain',position:'50% 56%'};
+    D.media.chef={type:'image',url:VEHICLES[3],fit:'contain',position:'50% 57%'};
+  }
+  (D.dishes||[]).forEach((d,i)=>{if(VEHICLES[i])d.image=VEHICLES[i]});
+  window.NovaVehicleAssets=VEHICLES.slice();
+  document.documentElement.dataset.dealerAssets='repo-png-six';
 })();
