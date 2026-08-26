@@ -22,4 +22,4 @@ window.RestaurantDefaults={
 /* Isolate persistence from the donor restaurant while reusing its proven Store implementation. */
 (() => {if(!window.RestaurantStore)return;const KEY='dealer-premium-class1',S=window.RestaurantStore,save=S.saveProject.bind(S),load=S.loadProject.bind(S),clear=S.clearProject.bind(S);S.saveProject=project=>save({...project,id:KEY});S.loadProject=()=>load(KEY);S.clearProject=()=>clear(KEY);})();
 /* Load Dealer-specific visuals/assets/runtime without replacing the donor HTML or its persistence engine. */
-(() => {const link=document.createElement('link');link.rel='stylesheet';link.href='dealer-premium.css';document.head.appendChild(link);['dealer-assets.js','dealer-runtime.js'].forEach(src=>{const s=document.createElement('script');s.src=src;s.async=false;document.head.appendChild(s)});})();
+(() => {const link=document.createElement('link');link.rel='stylesheet';link.href='dealer-premium.css';document.head.appendChild(link);['dealer-assets.js','dealer-motion-bridge.js','dealer-runtime.js'].forEach(src=>{const s=document.createElement('script');s.src=src;s.async=false;document.head.appendChild(s)});})();
