@@ -1,6 +1,7 @@
 /* Dealer bootstrap guard: prevents inherited Class 06 restaurant i18n from overwriting dealership copy. */
 (() => {
   'use strict';
+  if(!document.querySelector('script[data-dealer-detail-bridge]')){const s=document.createElement('script');s.src='dealer-detail-bridge.js';s.dataset.dealerDetailBridge='1';s.async=false;document.head.appendChild(s)}
   const $=s=>document.querySelector(s),D=()=>window.RestaurantDefaults;
   const map={
     'hero-kicker':'hero.kicker','hero-line1':'hero.line1','hero-line2':'hero.line2','hero-body':'hero.body','hero-cta':'hero.cta','hero-stamp':'hero.stamp','scroll-hint':'hero.scroll',
