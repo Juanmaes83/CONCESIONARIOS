@@ -12,8 +12,13 @@
   };
   const get=(obj,path)=>path.split('.').reduce((a,k)=>a?.[k],obj);const set=(sel,text)=>{const el=$(sel);if(el&&el.textContent!==text)el.textContent=text};
   let queued=false,applying=false;
+  function removeRestaurantOnlyLayers(){
+    document.querySelectorAll('.class7-context,#class7-journey-layer,#class7-journey-hint,#class7-journey-card,#class6-story,#class6-language').forEach(el=>el.remove());
+    document.documentElement.dataset.dishJourneyEnabled='false';
+  }
   function apply(){
     if(applying)return;applying=true;const d=D();if(!d){applying=false;return}
+    removeRestaurantOnlyLayers();
     Object.entries(map).forEach(([id,path])=>{const el=document.getElementById(id),v=get(d,path);if(el&&v!==undefined&&el.textContent!==String(v))el.textContent=v});
     set('.desktop-nav a[href="#signature"]','Models');set('.desktop-nav a[href="#story"]','Why NOVA');set('.desktop-nav a[href="#experience"]','Experience');set('.desktop-nav a[href="#visit"]','Showroom');set('button.studio-open','Dealer Studio');set('.reserve-open.pill','Book a test drive');
     const badges=$('#chef-badges');if(badges){const html=(d.chef.badges||[]).map(x=>`<span>${x}</span>`).join('');if(badges.innerHTML!==html)badges.innerHTML=html}
@@ -21,6 +26,6 @@
     document.documentElement.lang='en';document.title=`${d.brand.name} — Premium Electric Vehicles`;applying=false;
   }
   function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;apply()})}
-  const start=()=>{apply();new MutationObserver(schedule).observe(document.body,{subtree:true,childList:true,characterData:true});setInterval(apply,1600)};
+  const start=()=>{apply();new MutationObserver(schedule).observe(document.body,{subtree:true,childList:true,characterData:true});setInterval(apply,1200)};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,80));else setTimeout(start,80);
 })();
