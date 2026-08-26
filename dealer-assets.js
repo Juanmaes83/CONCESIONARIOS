@@ -1,6 +1,13 @@
-/* Runtime alpha preparation for Higgsfield product generations. */
+/* Runtime alpha preparation for Higgsfield product generations + donor media reuse. */
 (() => {
   'use strict';
+  const D=window.RestaurantDefaults;
+  if(D?.media){
+    D.media.hero={type:'image',url:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_ef284aac-ec4a-430d-bdb4-7aeec8b6cc4b.png',fit:'contain',position:'72% 54%'};
+    D.media.origin={type:'image',url:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_1d9402df-f6d2-4ab4-8336-36a07550c0df.png',fit:'contain',position:'50% 58%'};
+    D.media.atmosphere={type:'image',url:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_48afab8a-ae05-47f4-8159-962ab4a47430.png',fit:'contain',position:'50% 56%'};
+    D.media.chef={type:'image',url:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_42e21187-79f3-4ae0-87a3-8a085300b009.png',fit:'contain',position:'50% 57%'};
+  }
   const isTarget=src=>/hf_20260826_(?:072108_(?:3386a1a4|48afab8a|a8cd3fe5)|082019_(?:42e21187|1d9402df|ef284aac))/.test(src||'');
   async function keyImage(img){
     const source=img.currentSrc||img.src;if(!isTarget(source)||img.dataset.dealerAlpha==='done'||img.dataset.dealerAlpha==='loading')return;
@@ -16,7 +23,7 @@
       img.src=URL.createObjectURL(blob);img.dataset.dealerAlpha='done';
     }catch(err){img.dataset.dealerAlpha='failed';console.warn('Dealer alpha preparation failed',err)}
   }
-  const scan=()=>document.querySelectorAll('#orbit-stage .orbit-dish img').forEach(keyImage);
-  const wait=()=>{const stage=document.getElementById('orbit-stage');if(!stage){setTimeout(wait,120);return}scan();new MutationObserver(scan).observe(stage,{childList:true,subtree:true});setInterval(scan,1200)};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(wait,260));else setTimeout(wait,260);
+  const scan=()=>document.querySelectorAll('img').forEach(keyImage);
+  const wait=()=>{scan();new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});setInterval(scan,1200)};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(wait,180));else setTimeout(wait,180);
 })();
