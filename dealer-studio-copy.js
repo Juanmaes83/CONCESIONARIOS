@@ -1,10 +1,12 @@
 /* NOVA Dealer Studio vocabulary: preserves proven controls, replaces restaurant-facing language. */
 (() => {
   'use strict';
-  const $=s=>document.querySelector(s);const set=(s,t)=>{const e=$(s);if(e)e.textContent=t};
-  const textNode=(el,text)=>{if(!el)return;let n=[...el.childNodes].find(x=>x.nodeType===Node.TEXT_NODE);if(!n){n=document.createTextNode('');el.insertBefore(n,el.firstChild||null)}n.nodeValue=text};
+  const $=s=>document.querySelector(s);const set=(s,t)=>{const e=$(s);if(e&&e.textContent!==t)e.textContent=t};
+  const textNode=(el,text)=>{if(!el)return;let n=[...el.childNodes].find(x=>x.nodeType===Node.TEXT_NODE);if(!n){n=document.createTextNode('');el.insertBefore(n,el.firstChild||null)}if(n.nodeValue!==text)n.nodeValue=text};
   function labelFor(path,text){const input=$(`[data-path="${path}"]`);if(input)textNode(input.closest('label'),text)}
+  let applying=false,queued=false;
   function apply(){
+    if(applying)return;applying=true;
     set('[data-panel="brand"] .panel-intro .eyebrow','01 · Brand');set('[data-panel="brand"] .panel-intro h3','NOVA identity');set('[data-panel="brand"] .panel-intro p:nth-of-type(2)','Control the dealership name, palette and logo used across the customer-facing experience.');
     const brandName=$('[data-panel="brand"] label.full');if(brandName)textNode(brandName,'Dealership name ');
 
@@ -21,7 +23,7 @@
     set('.media-card[data-slot="origin"] strong','DESIGN · Engineering visual');set('.media-card[data-slot="origin"] .media-card-head span','Vehicle or engineering image used in the design chapter.');
     set('.media-card[data-slot="atmosphere"] strong','DRIVING EXPERIENCE · Road visual');set('.media-card[data-slot="atmosphere"] .media-card-head span','Vehicle, cabin or road image used in the driving chapter.');
     set('.media-card[data-slot="chef"] strong','EXPERT GUIDANCE · Featured vehicle');set('.media-card[data-slot="chef"] .media-card-head span','Supporting vehicle image for the advice chapter.');
-    document.querySelectorAll('.media-spec').forEach((el,i)=>{const copy=['Recommended: 16:9 · full vehicle or cinematic exterior.','Recommended: 4:5 · engineering, body detail or full vehicle.','Recommended: 16:9 · road, cabin or driving context.','Recommended: 4:5 · featured vehicle or consultation visual.'][i];if(copy)el.textContent=copy});
+    document.querySelectorAll('.media-spec').forEach((el,i)=>{const copy=['Recommended: 16:9 · full vehicle or cinematic exterior.','Recommended: 4:5 · engineering, body detail or full vehicle.','Recommended: 16:9 · road, cabin or driving context.','Recommended: 4:5 · featured vehicle or consultation visual.'][i];if(copy&&el.textContent!==copy)el.textContent=copy});
 
     set('[data-panel="visit"] .panel-intro .eyebrow','05 · Showroom & conversion');
     set('[data-panel="visit"] .panel-intro h3','Showroom, contact and test drives');
@@ -41,12 +43,23 @@
       const lab=$('[data-panel="motion"] label:has(#motion-orbital-style)');if(lab)textNode(lab,'Vehicle choreography ');
       const cards=[...motion.querySelectorAll('.motion-grid .motion-card')];
       const names=['Hero','Why NOVA','Design & engineering','Driving experience','Expert guidance','Showroom'];
-      cards.forEach((card,i)=>{const strong=card.querySelector('.motion-card-head strong');if(strong&&names[i])strong.textContent=names[i];const button=card.querySelector('.motion-preview');if(button)button.textContent='▶ Preview section'});
-      const help=motion.querySelector('.motion-help');if(help)help.innerHTML='<strong>Accessibility.</strong> Reduced-motion preferences keep content, navigation, test-drive actions and Dealer Studio available while removing non-essential animation.';
+      cards.forEach((card,i)=>{const strong=card.querySelector('.motion-card-head strong');if(strong&&names[i]&&strong.textContent!==names[i])strong.textContent=names[i];const button=card.querySelector('.motion-preview');if(button&&button.textContent!=='▶ Preview section')button.textContent='▶ Preview section'});
+      const help=motion.querySelector('.motion-help');const helpHtml='<strong>Accessibility.</strong> Reduced-motion preferences keep content, navigation, test-drive actions and Dealer Studio available while removing non-essential animation.';if(help&&help.innerHTML!==helpHtml)help.innerHTML=helpHtml;
     }
 
-    const help=$('[data-panel="dishes"] .studio-help');if(help)help.innerHTML='<strong>Vehicle image contract:</strong> isolated full vehicle, comparable camera height, consistent wheel baseline, clean cutout and enough lateral breathing room for the track choreography.';
-    const h4s=document.querySelectorAll('.detail-columns h4');['Specifications','Vehicle type','Performance','Best suited to'].forEach((t,i)=>{if(h4s[i])h4s[i].textContent=t});
+    const help=$('[data-panel="dishes"] .studio-help');const dishHelp='<strong>Vehicle image contract:</strong> isolated full vehicle, comparable camera height, consistent wheel baseline, clean cutout and enough lateral breathing room for the track choreography.';if(help&&help.innerHTML!==dishHelp)help.innerHTML=dishHelp;
+    const h4s=document.querySelectorAll('.detail-columns h4');['Specifications','Vehicle type','Performance','Best suited to'].forEach((t,i)=>{if(h4s[i]&&h4s[i].textContent!==t)h4s[i].textContent=t});
+    applying=false;
   }
-  let n=0;const timer=setInterval(()=>{apply();if(++n>50)clearInterval(timer)},100);document.addEventListener('DOMContentLoaded',apply);
+  function schedule(){if(queued||applying)return;queued=true;requestAnimationFrame(()=>{queued=false;apply()})}
+  function start(){
+    apply();
+    const studio=$('#studio');
+    if(studio)new MutationObserver(schedule).observe(studio,{subtree:true,childList:true,characterData:true});
+    document.addEventListener('click',e=>{if(e.target.closest?.('.studio-nav'))setTimeout(apply,0)},true);
+    window.addEventListener('restaurant:motion-change',()=>setTimeout(apply,0));
+    window.addEventListener('restaurant:project-loaded',()=>setTimeout(apply,0));
+    setInterval(apply,1500);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,60));else setTimeout(start,60);
 })();
