@@ -1,6 +1,18 @@
 /* Runtime alpha preparation for Higgsfield product generations + donor media reuse. */
 (() => {
   'use strict';
+  /* class4-config.js already loads this file from the cloned Restaurant index.
+     Use it as the deterministic Dealer bootstrap so no dealership module can exist
+     in the repository without actually being executed by the real cloned page. */
+  const loadDealerModule=(src,key)=>{
+    if(document.querySelector(`script[data-${key}]`))return;
+    const s=document.createElement('script');s.src=src;s.async=false;s.dataset[key.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]='1';document.head.appendChild(s);
+  };
+  loadDealerModule('dealer-content-guard.js','dealer-content-guard');
+  loadDealerModule('dealer-studio-copy.js','dealer-studio-copy');
+  loadDealerModule('dealer-drag-guard.js','dealer-drag-guard');
+  document.documentElement.dataset.dealerBootstrap='complete';
+
   const D=window.RestaurantDefaults;
   if(D?.media){
     D.media.hero={type:'image',url:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_082019_ef284aac-ec4a-430d-bdb4-7aeec8b6cc4b.png',fit:'contain',position:'72% 54%'};
