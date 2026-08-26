@@ -1,12 +1,16 @@
-/* NOVA Vehicle Track V4 — isolated visual stage. The donor orbit is intentionally hidden in Dealer mode. */
+/* NOVA Vehicle Track — isolated visual stage, Polestar perspective relay R1. */
 html[data-dealer-mode="true"] #orbit-stage{visibility:hidden!important;pointer-events:none!important;opacity:0!important}
-html[data-dealer-mode="true"] .orbit-shell{position:relative;overflow:hidden!important;isolation:isolate}
-.nova-track-stage{position:absolute;inset:0;z-index:9;overflow:hidden;pointer-events:auto;touch-action:pan-y;cursor:grab}
+html[data-dealer-mode="true"] .orbit-shell{position:relative;overflow:hidden!important;isolation:isolate;perspective:1200px;perspective-origin:50% 54%}
+.nova-track-stage{position:absolute;inset:0;z-index:9;overflow:hidden;pointer-events:auto;touch-action:pan-y;cursor:grab;transform-style:preserve-3d;perspective:1200px;perspective-origin:50% 54%}
 .nova-track-stage:active{cursor:grabbing}
-.nova-car{position:absolute;left:50%;top:54%;width:min(50vw,760px);height:min(31vw,470px);padding:0;border:0;background:transparent;appearance:none;transform-origin:50% 82%;will-change:transform,opacity,filter;cursor:pointer}
-.nova-car img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;background:transparent;pointer-events:none;user-select:none;filter:drop-shadow(0 30px 24px rgba(0,0,0,.12))}
-.nova-car[data-authority="hero"]{z-index:20}
-.nova-car[data-authority="neighbor"]{z-index:12}
+.nova-car{position:absolute;left:50%;top:54%;width:min(50vw,760px);height:min(31vw,470px);padding:0;border:0;background:transparent;appearance:none;transform-origin:50% 78%;transform-style:preserve-3d;backface-visibility:visible;will-change:transform,opacity,filter;cursor:pointer}
+.nova-car img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;background:transparent;pointer-events:none;user-select:none;transform:translateZ(0);filter:drop-shadow(0 28px 22px rgba(0,0,0,.13));transition:filter .12s linear}
+.nova-car[data-authority="hero"] img,.nova-car[data-authority="incoming"] img{filter:drop-shadow(0 34px 27px rgba(0,0,0,.16))}
+.nova-car[data-authority="outgoing"] img{filter:drop-shadow(0 24px 19px rgba(0,0,0,.11))}
+.nova-car[data-authority="hero"]{z-index:22}
+.nova-car[data-authority="incoming"]{z-index:22}
+.nova-car[data-authority="outgoing"]{z-index:19}
+.nova-car[data-authority="neighbor"],.nova-car[data-authority="next-up"]{z-index:12}
 .nova-car[data-authority="far"]{pointer-events:none}
 .nova-track-baseline{position:absolute;left:8%;right:8%;top:72%;height:1px;background:linear-gradient(90deg,transparent,rgba(17,17,15,.12) 12%,rgba(17,17,15,.12) 88%,transparent);z-index:3;pointer-events:none}
 html[data-dealer-mode="true"] .dealer-hotspot{z-index:25}
