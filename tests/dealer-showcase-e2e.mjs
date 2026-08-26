@@ -42,7 +42,7 @@ try{
   await page.screenshot({path:'qa/dealer-03-detail.png',fullPage:false});
   await page.click('#detail-close');await page.waitForTimeout(700);
 
-  await page.click('.studio-open');await page.waitForTimeout(300);
+  await page.click('button.studio-open');await page.waitForTimeout(300);
   check('Dealer Studio open',await page.locator('#studio').getAttribute('aria-hidden')==='false');
   check('Vehicles tab',(await page.locator('.studio-nav button[data-panel="dishes"]').innerText()).includes('Vehicles'));
   await page.click('.studio-nav button[data-panel="dishes"]');await page.waitForTimeout(180);
@@ -54,7 +54,8 @@ try{
 
   await page.click('.studio-nav button[data-panel="brand"]');await page.waitForTimeout(120);
   const brandInput=page.locator('[data-path="brand.name"]');
-  await brandInput.fill('NOVA MOTORS QA');await brandInput.dispatchEvent('input');await page.waitForTimeout(1100);
+  await brandInput.fill('NOVA MOTORS QA');
+  await page.waitForFunction(()=>document.querySelector('#studio-status')?.textContent?.toLowerCase().includes('guardado'),null,{timeout:8000});
   check('studio autosave status',(await page.locator('#studio-status').innerText()).toLowerCase().includes('guardado'),await page.locator('#studio-status').innerText());
   await page.reload({waitUntil:'networkidle',timeout:60000});await page.waitForSelector('#orbit-stage .orbit-dish',{timeout:15000});await page.waitForTimeout(4800);
   check('persistence after reload',(await page.locator('[data-brand]').first().innerText()).includes('NOVA MOTORS QA'),await page.locator('[data-brand]').first().innerText());
