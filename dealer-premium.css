@@ -1,4 +1,4 @@
-/* NOVA MOTORS — premium dealership skin layered over the approved restaurant architecture. */
+/* NOVA MOTORS — premium dealership skin over the approved editable architecture. */
 :root{--dealer-paper:#f2f0eb;--dealer-ink:#11110f;--dealer-line:rgba(17,17,15,.16);--dealer-muted:rgba(17,17,15,.58)}
 html[data-dealer-mode="true"] body{background:var(--dealer-paper)}
 html[data-dealer-mode="true"] .topbar{mix-blend-mode:normal}
@@ -7,38 +7,61 @@ html[data-dealer-mode="true"] .hero-media{background:radial-gradient(circle at 7
 html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{object-fit:contain!important;object-position:72% 56%!important;width:66%!important;left:34%!important;filter:drop-shadow(0 45px 38px rgba(0,0,0,.42))}
 html[data-dealer-mode="true"] .produce-media,html[data-dealer-mode="true"] .wide-image,html[data-dealer-mode="true"] .chef-image{background:linear-gradient(145deg,#eceae4,#d9d6ce);overflow:hidden}
 html[data-dealer-mode="true"] [data-media-host="origin"] .section-media-element,html[data-dealer-mode="true"] [data-media-host="atmosphere"] .section-media-element,html[data-dealer-mode="true"] [data-media-host="chef"] .section-media-element{object-fit:contain!important;padding:6%;filter:drop-shadow(0 30px 26px rgba(0,0,0,.18))}
+
 html[data-dealer-mode="true"] .orbital-section{position:relative;min-height:100vh;background:var(--dealer-paper);color:var(--dealer-ink);overflow:hidden;padding-bottom:5rem}
 html[data-dealer-mode="true"] .orbital-section::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.5),transparent 42%),radial-gradient(circle at 50% 62%,rgba(255,255,255,.65),transparent 42%);pointer-events:none}
 html[data-dealer-mode="true"] .orbital-top{position:relative;z-index:15;color:var(--dealer-ink)}
-html[data-dealer-mode="true"] .orbital-section .light{color:var(--dealer-muted)}
-html[data-dealer-mode="true"] .orbital-heading .kicker{color:var(--dealer-muted)}
+html[data-dealer-mode="true"] .orbital-section .light,html[data-dealer-mode="true"] .orbital-heading .kicker{color:var(--dealer-muted)}
 html[data-dealer-mode="true"] .orbit-shell{height:58vh;min-height:440px;overflow:hidden;border:0;isolation:isolate;cursor:grab;touch-action:pan-y}
 html[data-dealer-mode="true"] .orbit-shell:active{cursor:grabbing}
 html[data-dealer-mode="true"] .orbit-ring,html[data-dealer-mode="true"] .orbit-glow,html[data-dealer-mode="true"] .orbit-center-mark{display:none!important}
 html[data-dealer-mode="true"] .orbit-stage{position:absolute;inset:0;overflow:visible}
-html[data-dealer-mode="true"] .orbit-dish{position:absolute!important;left:50%!important;top:54%!important;width:min(58vw,900px)!important;height:min(33vw,520px)!important;background:transparent!important;border:0!important;padding:0!important;transform-origin:50% 78%;will-change:transform,opacity,filter}
+html[data-dealer-mode="true"] .orbit-dish{position:absolute!important;left:50%!important;top:54%!important;width:min(58vw,900px)!important;height:min(33vw,520px)!important;background:transparent!important;border:0!important;padding:0!important;transform-origin:50% 78%;will-change:transform,opacity,filter;contain:layout style}
 html[data-dealer-mode="true"] .orbit-dish img{width:100%!important;height:100%!important;object-fit:contain!important;filter:none;pointer-events:none;user-select:none;display:block}
-html[data-dealer-mode="true"] .dish-copy{position:relative;z-index:16;color:var(--dealer-ink);max-width:33rem;margin-top:-1.2rem;transition:opacity .24s ease,transform .24s ease}
-html[data-dealer-mode="true"] .dish-copy[data-transitioning="true"]{opacity:.06;transform:translateY(8px)}
+
+/* Copy is owned by the GSAP choreography; no competing CSS fade. */
+html[data-dealer-mode="true"] .dish-copy{position:relative;z-index:16;color:var(--dealer-ink);max-width:33rem;margin-top:-1.2rem;will-change:transform,opacity}
 html[data-dealer-mode="true"] .dish-copy .kicker{color:var(--dealer-muted)}
 html[data-dealer-mode="true"] .dish-copy .display{font-size:clamp(2.6rem,5vw,6rem);line-height:.92;margin:.2rem 0 .8rem;color:var(--dealer-ink)}
 html[data-dealer-mode="true"] .dish-copy>p:not(.kicker){color:var(--dealer-muted);max-width:35rem}
 html[data-dealer-mode="true"] .explore{color:var(--dealer-ink);border-color:var(--dealer-line)}
 html[data-dealer-mode="true"] .orbit-controls{position:relative;z-index:18;color:var(--dealer-ink)}
 html[data-dealer-mode="true"] .orbit-controls .circle-btn{color:var(--dealer-ink);border-color:var(--dealer-line);background:rgba(255,255,255,.34);backdrop-filter:blur(12px)}
-.dealer-ghost-index{position:absolute;z-index:1;left:50%;top:47%;transform:translate(-50%,-50%);font-family:Italiana,serif;font-size:clamp(15rem,42vw,48rem);line-height:.72;color:rgba(20,20,18,.055);letter-spacing:-.09em;pointer-events:none;user-select:none}
-.dealer-hotspot{position:absolute;z-index:14;left:64%;top:48%;width:58px;height:58px;border:1px solid rgba(17,17,15,.38);border-radius:50%;display:grid;place-items:center;background:rgba(242,240,235,.56);backdrop-filter:blur(8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
-.dealer-hotspot::before,.dealer-hotspot::after{content:"";position:absolute;background:rgba(17,17,15,.6)}
-.dealer-hotspot::before{width:15px;height:1px}.dealer-hotspot::after{height:15px;width:1px}
-.dealer-hotspot span{position:absolute;top:69px;white-space:nowrap;text-transform:uppercase;letter-spacing:.16em;font-size:.58rem;color:var(--dealer-muted)}
+
+/* Editorial backdrop: old and new indexes cross independently, as in the reference film. */
+.dealer-ghost-index{position:absolute;z-index:1;left:50%;top:47%;width:70vw;height:50vh;transform:translate(-50%,-50%);pointer-events:none;user-select:none;overflow:visible}
+.dealer-ghost-index span{position:absolute;inset:0;display:grid;place-items:center;font-family:Italiana,serif;font-size:clamp(15rem,42vw,48rem);line-height:.72;color:rgba(20,20,18,.052);letter-spacing:-.09em;will-change:transform,opacity}
+.dealer-ghost-next{opacity:0}
+
+/* Hotspot travels with the active vehicle; inline left/top are generated from the vehicle box. */
+.dealer-hotspot{position:absolute;z-index:14;width:54px;height:54px;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;background:#11110f;color:#fff;pointer-events:none;will-change:left,top,transform,opacity;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.dealer-hotspot::before{content:"+";font:500 15px/1 DM Sans,sans-serif;color:#fff}
+.dealer-hotspot span{position:absolute;left:68px;top:50%;transform:translateY(-50%);white-space:nowrap;text-transform:uppercase;letter-spacing:.16em;font-size:.56rem;color:rgba(17,17,15,.62)}
+
+/* Progress bars physically hand authority from outgoing to incoming. */
 .dealer-progress{position:absolute;z-index:17;right:5vw;bottom:4rem;display:flex;align-items:center;gap:8px}
-.dealer-progress button{width:38px;height:3px;border:0;padding:0;background:rgba(17,17,15,.18);cursor:pointer;transition:width .35s ease,background .35s ease}
-.dealer-progress button[aria-current="true"]{width:74px;background:var(--dealer-ink)}
+.dealer-progress button{--vehicle-progress:0;width:38px;height:3px;border:0;padding:0;background:linear-gradient(90deg,var(--dealer-ink) calc(var(--vehicle-progress)*100%),rgba(17,17,15,.17) 0);cursor:pointer;transition:width .18s ease}
+.dealer-progress button[aria-current="true"]{width:74px}
+
 html[data-dealer-mode="true"] .detail-copy h4{font-family:DM Sans,sans-serif;text-transform:uppercase;letter-spacing:.15em;font-size:.68rem;color:rgba(255,255,255,.48)}
 html[data-dealer-mode="true"] .detail-reserve{background:var(--accent);color:#111}
 html[data-dealer-mode="true"] .studio{--studio-accent:var(--accent)}
 html[data-dealer-mode="true"] .studio-titleline small{letter-spacing:.14em}
 html[data-dealer-mode="true"] .studio-nav button[data-panel="dishes"]::after{content:" VEHICLES";font-size:.56rem;opacity:.45;margin-left:.25rem}
-@media(max-width:900px){html[data-dealer-mode="true"] .orbit-shell{height:52vh;min-height:390px}html[data-dealer-mode="true"] .orbit-dish{width:min(76vw,720px)!important;height:min(48vw,440px)!important}.dealer-hotspot{left:70%;top:51%}.dealer-progress{right:1.4rem;bottom:3rem}html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{width:76%!important;left:24%!important}}
-@media(max-width:620px){html[data-dealer-mode="true"] .orbital-section{min-height:92vh}html[data-dealer-mode="true"] .orbit-shell{height:44vh;min-height:320px}html[data-dealer-mode="true"] .orbit-dish{width:88vw!important;height:58vw!important;top:52%!important}.dealer-ghost-index{font-size:58vw;top:45%}.dealer-hotspot{width:44px;height:44px;left:73%;top:46%}.dealer-hotspot span{display:none}.dealer-progress{bottom:2rem}.dish-copy{padding-right:1rem}html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{width:100%!important;left:0!important;opacity:.62}}
-@media(prefers-reduced-motion:reduce){.dealer-hotspot,.dealer-progress button,html[data-dealer-mode="true"] .dish-copy{transition:none!important}}
+
+@media(max-width:900px){
+  html[data-dealer-mode="true"] .orbit-shell{height:52vh;min-height:390px}
+  html[data-dealer-mode="true"] .orbit-dish{width:min(76vw,720px)!important;height:min(48vw,440px)!important}
+  .dealer-progress{right:1.4rem;bottom:3rem}
+  html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{width:76%!important;left:24%!important}
+}
+@media(max-width:620px){
+  html[data-dealer-mode="true"] .orbital-section{min-height:92vh}
+  html[data-dealer-mode="true"] .orbit-shell{height:44vh;min-height:320px}
+  html[data-dealer-mode="true"] .orbit-dish{width:88vw!important;height:58vw!important;top:52%!important}
+  .dealer-ghost-index{font-size:58vw;top:45%}
+  .dealer-hotspot{width:42px;height:42px}.dealer-hotspot span{display:none}
+  .dealer-progress{bottom:2rem}.dish-copy{padding-right:1rem}
+  html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{width:100%!important;left:0!important;opacity:.62}
+}
+@media(prefers-reduced-motion:reduce){.dealer-progress button{transition:none!important}}
