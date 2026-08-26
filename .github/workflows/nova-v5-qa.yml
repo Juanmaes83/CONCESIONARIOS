@@ -20,14 +20,14 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Serve NOVA
         run: |
-          python3 -m http.server 4173 >/tmp/nova-v5-http.log 2>&1 &
+          python3 -m http.server 4173 >/tmp/nova-r1-http.log 2>&1 &
           sleep 2
-      - name: Run NOVA V5 browser QA
-        run: node tests/nova-v5-e2e.mjs
-      - name: Upload NOVA V5 evidence
+      - name: Run Polestar R1 visual QA
+        run: node tests/polestar-r1-e2e.mjs
+      - name: Upload Polestar R1 evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: nova-v5-qa
-          path: qa-v5/
-          if-no-files-found: warn
+          name: polestar-r1-qa
+          path: qa-polestar/
+          if-no-files-found: error
