@@ -18,10 +18,20 @@ try{
   check('initial vehicle',(await page.locator('#dish-title').innerText()).includes('Model S'),await page.locator('#dish-title').innerText());
   const alpha=await page.locator('#orbit-stage .orbit-dish img').evaluateAll(els=>els.map(e=>e.dataset.dealerAlpha||'none'));
   check('Higgsfield alpha',alpha.every(x=>x==='done'),alpha.join(','));
+
   await page.locator('#signature').scrollIntoViewIfNeeded();await page.waitForTimeout(400);await page.screenshot({path:'qa/dealer-01-model-s.png',fullPage:false});
-  await page.click('#next-dish');await page.waitForTimeout(1100);
-  check('next to Model X',(await page.locator('#dish-title').innerText()).includes('Model X'),await page.locator('#dish-title').innerText());
+
+  // Drag: Model S -> Model X using the same physical gesture as the reference track.
+  const box=await page.locator('.orbit-shell').boundingBox();
+  check('orbit shell measurable',!!box,JSON.stringify(box));
+  await page.mouse.move(box.x+box.width*.67,box.y+box.height*.55);
+  await page.mouse.down();
+  await page.mouse.move(box.x+box.width*.28,box.y+box.height*.55,{steps:14});
+  await page.mouse.up();
+  await page.waitForTimeout(1100);
+  check('drag to Model X',(await page.locator('#dish-title').innerText()).includes('Model X'),await page.locator('#dish-title').innerText());
   await page.screenshot({path:'qa/dealer-02-model-x.png',fullPage:false});
+
   await page.click('#next-dish');await page.waitForTimeout(1100);
   check('next to Model Y',(await page.locator('#dish-title').innerText()).includes('Model Y'),await page.locator('#dish-title').innerText());
   await page.screenshot({path:'qa/dealer-03-model-y.png',fullPage:false});
@@ -31,16 +41,32 @@ try{
   check('keyboard',(await page.locator('#dish-title').innerText()).includes('Model X'),await page.locator('#dish-title').innerText());
   await page.locator('.orbit-shell').hover();await page.mouse.wheel(0,500);await page.waitForTimeout(1100);
   check('wheel',(await page.locator('#dish-title').innerText()).includes('Model Y'),await page.locator('#dish-title').innerText());
+
   await page.click('#explore-dish');await page.waitForTimeout(700);
   check('vehicle detail',await page.locator('#dish-detail').getAttribute('aria-hidden')==='false');
   check('detail title',(await page.locator('#detail-title').innerText()).includes('Model Y'),await page.locator('#detail-title').innerText());
   await page.click('#detail-close');await page.waitForTimeout(700);
+
   await page.click('.studio-open');await page.waitForTimeout(300);
   check('Dealer Studio open',await page.locator('#studio').getAttribute('aria-hidden')==='false');
   check('Vehicles tab',(await page.locator('.studio-nav button[data-panel="dishes"]').innerText()).includes('Vehicles'));
   await page.click('.studio-nav button[data-panel="motion"]');await page.waitForTimeout(150);
   check('Vehicle Track preset',await page.locator('#motion-orbital-style').inputValue()==='dealer',await page.locator('#motion-orbital-style').inputValue());
   await page.screenshot({path:'qa/dealer-04-studio.png',fullPage:false});
+
+  // Persistence: edit brand through the real donor Studio, wait for autosave, reload and verify restoration.
+  await page.click('.studio-nav button[data-panel="brand"]');await page.waitForTimeout(120);
+  const brandInput=page.locator('[data-path="brand.name"]');
+  await brandInput.fill('NOVA MOTORS QA');
+  await brandInput.dispatchEvent('input');
+  await page.waitForTimeout(1100);
+  check('studio autosave status',(await page.locator('#studio-status').innerText()).toLowerCase().includes('guardado'),await page.locator('#studio-status').innerText());
+  await page.reload({waitUntil:'networkidle',timeout:60000});
+  await page.waitForSelector('#orbit-stage .orbit-dish',{timeout:15000});await page.waitForTimeout(4200);
+  check('persistence after reload',(await page.locator('[data-brand]').first().innerText()).includes('NOVA MOTORS QA'),await page.locator('[data-brand]').first().innerText());
+  check('vehicle count after reload',await page.locator('#orbit-stage .orbit-dish').count()===3,String(await page.locator('#orbit-stage .orbit-dish').count()));
+  check('Vehicle Track after reload',await page.locator('html').getAttribute('data-orbital-motion')==='dealer',await page.locator('html').getAttribute('data-orbital-motion'));
+
   check('no JS errors',errors.length===0,errors.join('\n'));
   result.ok=true;
 }catch(err){result.ok=false;result.failure=err.message;await page.screenshot({path:'qa/dealer-failure.png',fullPage:true}).catch(()=>{});}
