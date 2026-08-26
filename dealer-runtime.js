@@ -114,12 +114,17 @@
       progress=state.p;renderTrack(progress,{transfer:state.transfer,velocity:state.velocity});
       setProgressVisual(fromIndex,toIndex,state.editorial);
       const hotIndex=state.transfer<.56?fromIndex:toIndex;positionHotspot(hotIndex,Math.max(.08,Math.abs(state.transfer-.5)*2));
-    },onComplete(){progress=target;renderTrack(progress,{transfer:1,velocity:0});setCopy(toIndex);updateEditorial(toIndex,true);finish()}});
+    },onComplete(){
+      /* Donor state sync happens only after NOVA has completed the physical choreography.
+         This prevents the restaurant engine from resetting transforms mid-transition. */
+      nativeStep(dir);
+      progress=target;renderTrack(progress,{transfer:1,velocity:0});setCopy(toIndex);updateEditorial(toIndex,true);finish()
+    }});
 
     timeline
       .to(state,{p:anticipate,velocity:dir*.18,transfer:.05,duration:CHOREO.anticipation,ease:'power2.in',onStart(){phase='anticipation';document.documentElement.dataset.vehicleMotionPhase=phase}},0)
       .to(state,{p:target-dir*.12,velocity:dir,transfer:.70,duration:CHOREO.travel,ease:'power3.inOut',onStart(){phase='travel';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation)
-      .call(()=>{nativeStep(dir);phase='transfer';document.documentElement.dataset.vehicleMotionPhase=phase},[],CHOREO.anticipation+CHOREO.travel*.58)
+      .call(()=>{phase='transfer';document.documentElement.dataset.vehicleMotionPhase=phase},[],CHOREO.anticipation+CHOREO.travel*.58)
       .to(copy,{opacity:0,y:8,duration:.13,ease:'power2.in',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel*.72)
       .to(state,{p:overshoot,velocity:dir*.30,transfer:1,duration:CHOREO.brake,ease:'power4.out',onStart(){phase='brake';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel)
       .call(()=>setCopy(toIndex),[],CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.75)
@@ -140,7 +145,7 @@
     if(nextBtn)nextBtn.onclick=e=>{e?.preventDefault?.();transition(1,'button')};if(prevBtn)prevBtn.onclick=e=>{e?.preventDefault?.();transition(-1,'button')};
     shell.addEventListener('wheel',e=>{if(detailOpen())return;e.preventDefault();e.stopImmediatePropagation();const now=performance.now();if(now-lastWheel<900)return;lastWheel=now;transition((Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY)>=0?1:-1,'wheel')},{capture:true,passive:false});
     shell.addEventListener('keydown',e=>{if(detailOpen())return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();e.stopImmediatePropagation();transition(e.key==='ArrowRight'?1:-1,'keyboard')}},{capture:true});
-    stage.addEventListener('click',e=>{if(performance.now()<suppressClickUntil){e.preventDefault();e.stopImmediatePropagation()}},{capture:true});
+    stage.addEventListener('click',e=>{if(busy||performance.now()<suppressClickUntil){e.preventDefault();e.stopImmediatePropagation()}},{capture:true});
     shell.addEventListener('pointerdown',e=>{if(busy||detailOpen())return;drag=true;dragX=e.clientX;dragProgress=progress;shell.setPointerCapture?.(e.pointerId);e.stopImmediatePropagation()},{capture:true});
     shell.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-dragX,denom=shell.clientWidth*(innerWidth<620?.82:.68);progress=dragProgress-dx/denom;renderTrack(progress,{transfer:Math.min(1,Math.abs(dx)/denom),velocity:-Math.sign(dx)*.35});positionHotspot(currentIndex(),.25);e.stopImmediatePropagation()},{capture:true});
     const end=e=>{if(!drag)return;drag=false;const dx=e.clientX-dragX;progress=dragProgress;renderTrack(progress);e.stopImmediatePropagation();if(Math.abs(dx)>42){suppressClickUntil=performance.now()+1100;transition(dx<0?1:-1,'drag')}else enforce(240)};
