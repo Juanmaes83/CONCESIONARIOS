@@ -19,5 +19,7 @@ window.RestaurantDefaults={
     {id:'vehicle-03',name:'Model Y',meta:'Long Range · 600 km class · AWD',short:'The balanced crossover: efficient packaging, everyday usability and the same clean electric response.',price:'From €48,990',image:'https://d8j0ntlcm91z4.cloudfront.net/user_32Z72jiRnAYwuEpbVNGYFa3wWSz/hf_20260826_072108_a8cd3fe5-5e51-4dac-9ba1-b790ae1b7ddd.png',ingredients:'Long Range · AWD · 5 seats · fast charging',origin:'Electric crossover',technique:'Low centre of gravity · instant torque',pairing:'Daily use · family · commuting',note:'The easiest point of entry when one car has to do almost everything.',allergens:'Range depends on version and wheel choice',enabled:true}
   ]
 };
-/* Load the dealership skin/runtime without replacing the donor HTML or persistence engine. */
-(() => {const link=document.createElement('link');link.rel='stylesheet';link.href='dealer-premium.css';document.head.appendChild(link);const s=document.createElement('script');s.src='dealer-runtime.js';s.async=false;document.head.appendChild(s);})();
+/* Isolate persistence from the donor restaurant while reusing its proven Store implementation. */
+(() => {if(!window.RestaurantStore)return;const KEY='dealer-premium-class1',S=window.RestaurantStore,save=S.saveProject.bind(S),load=S.loadProject.bind(S),clear=S.clearProject.bind(S);S.saveProject=project=>save({...project,id:KEY});S.loadProject=()=>load(KEY);S.clearProject=()=>clear(KEY);})();
+/* Load Dealer-specific visuals/assets/runtime without replacing the donor HTML or its persistence engine. */
+(() => {const link=document.createElement('link');link.rel='stylesheet';link.href='dealer-premium.css';document.head.appendChild(link);['dealer-assets.js','dealer-runtime.js'].forEach(src=>{const s=document.createElement('script');s.src=src;s.async=false;document.head.appendChild(s)});})();
