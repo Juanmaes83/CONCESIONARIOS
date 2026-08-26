@@ -1,0 +1,33 @@
+name: NOVA V5 QA
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  chromium-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright
+        run: |
+          npm install playwright@latest
+          npx playwright install --with-deps chromium
+      - name: Serve NOVA
+        run: |
+          python3 -m http.server 4173 >/tmp/nova-v5-http.log 2>&1 &
+          sleep 2
+      - name: Run NOVA V5 browser QA
+        run: node tests/nova-v5-e2e.mjs
+      - name: Upload NOVA V5 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nova-v5-qa
+          path: qa-v5/
+          if-no-files-found: warn
