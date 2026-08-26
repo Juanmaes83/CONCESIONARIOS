@@ -19,7 +19,7 @@
     document.documentElement.dataset.orbitalMotion='dealer';
     [
       ['.desktop-nav a[href="#signature"]','Models'],['.desktop-nav a[href="#story"]','Philosophy'],['.desktop-nav a[href="#experience"]','Experience'],['.desktop-nav a[href="#visit"]','Visit'],
-      ['.studio-open','Dealer Studio'],['.reserve-open.pill','Book a drive'],['.studio-titleline small','PREMIUM DEALER STUDIO · VEHICLE EXPERIENCE'],
+      ['button.studio-open','Dealer Studio'],['.reserve-open.pill','Book a drive'],['.studio-titleline small','PREMIUM DEALER STUDIO · VEHICLE EXPERIENCE'],
       ['.studio-nav button[data-panel="dishes"]','Vehicles'],
       ['[data-panel="brand"] .panel-intro h3','Dealership identity'],['[data-panel="brand"] .panel-intro p:nth-of-type(2)','Edit dealer name, palette and logo while preserving the premium visual system.'],
       ['[data-panel="dishes"] .panel-intro .eyebrow','04 · Vehicle Showcase'],['[data-panel="dishes"] .panel-intro h3','Vehicle manager'],['[data-panel="dishes"] .panel-intro p:nth-of-type(2)','Add, duplicate, hide and reorder vehicles. Each record feeds the showcase and the immersive vehicle detail.'],
