@@ -33,7 +33,17 @@
     set('[data-panel="project"] .panel-intro .eyebrow','07 · Project');set('[data-panel="project"] .panel-intro h3','Project state and portability');set('[data-panel="project"] .panel-intro p:nth-of-type(2)','Save, restore, preview and export the complete NOVA Motors dealership configuration.');
     set('[data-panel="project"] .project-card:last-child h4','Restore NOVA Motors demo');set('[data-panel="project"] .project-card:last-child p','Remove local project/media and restore the six-vehicle NOVA Motors demo.');
 
-    const motion=$('[data-panel="motion"]');if(motion){set('[data-panel="motion"] .panel-intro h3','Vehicle motion direction');set('[data-panel="motion"] .panel-intro p:nth-of-type(2)','Choose a designed motion language for the vehicle collection without exposing technical animation parameters.');set('[data-panel="motion"] .motion-card-featured strong','NOVA Vehicle Choreography');set('[data-panel="motion"] .motion-card-featured p','Track, mass transfer, braking, lock and editorial synchronisation for the full collection.');const lab=$('[data-panel="motion"] label:has(#motion-orbital-style)');if(lab)textNode(lab,'Vehicle choreography ')}
+    const motion=$('[data-panel="motion"]');if(motion){
+      set('[data-panel="motion"] .panel-intro h3','Vehicle motion direction');
+      set('[data-panel="motion"] .panel-intro p:nth-of-type(2)','Choose a designed motion language for the vehicle collection without exposing technical animation parameters.');
+      set('[data-panel="motion"] .motion-card-featured strong','NOVA Vehicle Choreography');
+      set('[data-panel="motion"] .motion-card-featured p','Track, mass transfer, braking, lock and editorial synchronisation for the full collection.');
+      const lab=$('[data-panel="motion"] label:has(#motion-orbital-style)');if(lab)textNode(lab,'Vehicle choreography ');
+      const cards=[...motion.querySelectorAll('.motion-grid .motion-card')];
+      const names=['Hero','Why NOVA','Design & engineering','Driving experience','Expert guidance','Showroom'];
+      cards.forEach((card,i)=>{const strong=card.querySelector('.motion-card-head strong');if(strong&&names[i])strong.textContent=names[i];const button=card.querySelector('.motion-preview');if(button)button.textContent='▶ Preview section'});
+      const help=motion.querySelector('.motion-help');if(help)help.innerHTML='<strong>Accessibility.</strong> Reduced-motion preferences keep content, navigation, test-drive actions and Dealer Studio available while removing non-essential animation.';
+    }
 
     const help=$('[data-panel="dishes"] .studio-help');if(help)help.innerHTML='<strong>Vehicle image contract:</strong> isolated full vehicle, comparable camera height, consistent wheel baseline, clean cutout and enough lateral breathing room for the track choreography.';
     const h4s=document.querySelectorAll('.detail-columns h4');['Specifications','Vehicle type','Performance','Best suited to'].forEach((t,i)=>{if(h4s[i])h4s[i].textContent=t});
