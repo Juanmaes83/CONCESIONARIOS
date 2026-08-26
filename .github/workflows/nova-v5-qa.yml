@@ -1,0 +1,33 @@
+name: NOVA V5 QA
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  chromium-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright
+        run: |
+          npm install playwright@latest
+          npx playwright install --with-deps chromium
+      - name: Serve NOVA
+        run: |
+          python3 -m http.server 4173 >/tmp/nova-r1-http.log 2>&1 &
+          sleep 2
+      - name: Run Polestar R1 visual QA
+        run: node tests/polestar-r1-e2e.mjs
+      - name: Upload Polestar R1 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: polestar-r1-qa
+          path: qa-polestar/
+          if-no-files-found: error

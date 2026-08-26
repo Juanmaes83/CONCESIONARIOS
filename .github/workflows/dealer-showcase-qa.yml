@@ -1,0 +1,34 @@
+name: Dealer Showcase QA
+on:
+  push:
+    branches:
+      - feat/concesionarios-restaurant-clone-base
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve cloned dealership
+        run: |
+          python3 -m http.server 4173 > /tmp/dealer-server.log 2>&1 &
+          sleep 2
+      - name: Run Dealer Showcase browser QA
+        run: node tests/dealer-showcase-e2e.mjs
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dealer-showcase-qa
+          path: qa/
+          if-no-files-found: warn

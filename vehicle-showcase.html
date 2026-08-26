@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4eee5" />
+  <title>CONCESIONARIOS — Vehicle Showcase Track</title>
+  <meta name="description" content="Escaparate premium horizontal para concesionarios, basado en la coreografía del vídeo de referencia." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vehicle-showcase.css" />
+</head>
+<body>
+  <div class="page-shell" id="top">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Inicio"><span data-bind="brand.name">ATLAS MOTORS</span></a>
+      <nav aria-label="Navegación principal">
+        <a href="#showcase">Showcase</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="studio-toggle" type="button" data-open-studio>Panel</button>
+    </header>
+
+    <main>
+      <section class="vehicle-hero" id="showcase" aria-label="Vehicle Showcase Track">
+        <div class="ghost-index" aria-hidden="true" data-ghost>01</div>
+        <div class="hero-copy">
+          <p class="eyebrow" data-bind="brand.kicker">PREMIUM ELECTRIC SELECTION</p>
+          <h1><span data-bind="brand.titleA">Choose the machine</span><em data-bind="brand.titleB">that changes the road.</em></h1>
+        </div>
+
+        <div class="vehicle-stage" tabindex="0" aria-label="Carrusel premium de vehículos. Usa rueda, arrastra, flechas o botones.">
+          <div class="vehicle-rail" data-rail></div>
+          <button class="vehicle-hotspot" type="button" data-hotspot aria-label="Ver detalle del vehículo activo">
+            <span></span>
+            <strong data-hotspot-title>Design</strong>
+          </button>
+        </div>
+
+        <div class="vehicle-copy" aria-live="polite">
+          <p class="vehicle-model" data-vehicle-model>Tesla Model S</p>
+          <h2 data-vehicle-title>Performance without noise.</h2>
+          <p data-vehicle-body>Luxury electric sedan with instant torque, long-range confidence and a clean grand touring silhouette.</p>
+          <button type="button" class="cta" data-vehicle-cta>Book a private test drive</button>
+        </div>
+
+        <div class="showcase-controls">
+          <button type="button" data-prev aria-label="Vehículo anterior">←</button>
+          <div class="progress-track" data-progress aria-label="Progreso del carrusel"></div>
+          <button type="button" data-next aria-label="Vehículo siguiente">→</button>
+        </div>
+      </section>
+
+      <section class="experience" id="experience">
+        <p class="eyebrow">VEHICLE JOURNEY</p>
+        <h2>From showroom presence to private appointment.</h2>
+        <div class="experience-grid">
+          <article><span>01</span><strong>Editorial Track</strong><p>Horizontal rail, neighbours partially visible, active vehicle locked by snap.</p></article>
+          <article><span>02</span><strong>Vehicle Story</strong><p>Each model carries a short emotional and technical narrative.</p></article>
+          <article><span>03</span><strong>Personal Panel</strong><p>Brand, vehicle names, copy, CTA and motion language are editable.</p></article>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <p class="eyebrow">PRIVATE VIEWING</p>
+        <h2 data-bind="brand.closing">Reserve the showroom. Own the moment.</h2>
+        <button type="button" class="cta dark" data-bind="brand.finalCta">Request appointment</button>
+      </section>
+    </main>
+  </div>
+
+  <aside class="studio" data-studio aria-hidden="true">
+    <div class="studio-head">
+      <div><small>CONCESIONARIOS STUDIO</small><strong>Panel personalizable</strong></div>
+      <button type="button" data-close-studio aria-label="Cerrar panel">×</button>
+    </div>
+    <div class="studio-scroll">
+      <section>
+        <p class="studio-eyebrow">01 · Marca</p>
+        <label>Nombre concesionario<input data-field="brand.name" /></label>
+        <label>Kicker<input data-field="brand.kicker" /></label>
+        <label>Título línea 1<input data-field="brand.titleA" /></label>
+        <label>Título línea 2<input data-field="brand.titleB" /></label>
+        <label>Cierre<input data-field="brand.closing" /></label>
+        <label>CTA final<input data-field="brand.finalCta" /></label>
+      </section>
+      <section>
+        <p class="studio-eyebrow">02 · Vehículo activo</p>
+        <label>Modelo<input data-vehicle-field="model" /></label>
+        <label>Título<input data-vehicle-field="title" /></label>
+        <label>Descripción<textarea rows="4" data-vehicle-field="body"></textarea></label>
+        <label>Hotspot<input data-vehicle-field="hotspot" /></label>
+        <label>CTA<input data-vehicle-field="cta" /></label>
+      </section>
+      <section>
+        <p class="studio-eyebrow">03 · Proyecto</p>
+        <div class="studio-actions">
+          <button type="button" data-export>Export JSON</button>
+          <button type="button" data-reset>Reset</button>
+        </div>
+        <textarea rows="7" data-json-output placeholder="Export aparecerá aquí"></textarea>
+      </section>
+    </div>
+  </aside>
+
+  <script src="vehicle-showcase.js"></script>
+</body>
+</html>
