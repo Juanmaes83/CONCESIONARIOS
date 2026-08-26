@@ -110,8 +110,6 @@
     const gc=$('.dealer-ghost-current'),gn=$('.dealer-ghost-next'),hot=$('.dealer-hotspot');
     if(gc)gc.textContent=String(fromIndex+1).padStart(2,'0');if(gn)gn.textContent=String(toIndex+1).padStart(2,'0');
     gsap.set(gn,{x:dir*54,opacity:0,scale:1.04});gsap.set(gc,{x:0,opacity:1,scale:1});
-    /* Do not use overwrite:true as a timeline default: consecutive tweens share state.p
-       and must hand movement to one another instead of killing the anticipation segment. */
     timeline=gsap.timeline({onUpdate(){
       progress=state.p;renderTrack(progress,{transfer:state.transfer,velocity:state.velocity});
       setProgressVisual(fromIndex,toIndex,state.editorial);
@@ -122,14 +120,14 @@
       .to(state,{p:anticipate,velocity:dir*.18,transfer:.05,duration:CHOREO.anticipation,ease:'power2.in',onStart(){phase='anticipation';document.documentElement.dataset.vehicleMotionPhase=phase}},0)
       .to(state,{p:target-dir*.12,velocity:dir,transfer:.70,duration:CHOREO.travel,ease:'power3.inOut',onStart(){phase='travel';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation)
       .call(()=>{nativeStep(dir);phase='transfer';document.documentElement.dataset.vehicleMotionPhase=phase},[],CHOREO.anticipation+CHOREO.travel*.58)
-      .to(copy,{opacity:0,y:8,duration:.13,ease:'power2.in',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel*.60)
-      .call(()=>setCopy(toIndex),[],CHOREO.anticipation+CHOREO.travel*.78)
+      .to(copy,{opacity:0,y:8,duration:.13,ease:'power2.in',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel*.72)
       .to(state,{p:overshoot,velocity:dir*.30,transfer:1,duration:CHOREO.brake,ease:'power4.out',onStart(){phase='brake';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel)
+      .call(()=>setCopy(toIndex),[],CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.75)
       .to(state,{p:target,velocity:0,transfer:1,duration:CHOREO.settle,ease:'power3.out',onStart(){phase='settle';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel+CHOREO.brake)
-      .to(gc,{x:-dir*42,opacity:0,scale:1.035,duration:.22,ease:'power2.in',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel*.66)
-      .to(gn,{x:0,opacity:1,scale:1,duration:.34,ease:'power3.out',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel*.78)
-      .to(state,{editorial:1,duration:CHOREO.editorial,ease:'power2.out',onStart(){phase='editorial';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel*.72)
-      .to(copy,{opacity:1,y:0,duration:.28,ease:'power3.out',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.55)
+      .to(gc,{x:-dir*42,opacity:0,scale:1.035,duration:.22,ease:'power2.in',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.28)
+      .to(gn,{x:0,opacity:1,scale:1,duration:.34,ease:'power3.out',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.55)
+      .to(state,{editorial:1,duration:CHOREO.editorial,ease:'power2.out',onStart(){phase='editorial';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.72)
+      .to(copy,{opacity:1,y:0,duration:.28,ease:'power3.out',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.82)
       .to(hot,{scale:1.08,duration:.12,ease:'power2.out',yoyo:true,repeat:1,overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake+CHOREO.settle*.40);
   }
 
