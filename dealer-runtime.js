@@ -3,7 +3,7 @@
   'use strict';
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let shell,stage,nextBtn,prevBtn,copy,counter,nativeNext,nativePrev,progress=0,busy=false,drag=false,dragX=0,dragProgress=0,lastWheel=0,raf=0;
+  let shell,stage,nextBtn,prevBtn,copy,counter,nativeNext,nativePrev,progress=0,busy=false,drag=false,dragX=0,dragProgress=0,lastWheel=0,raf=0,suppressClickUntil=0;
 
   function relabel(){
     document.documentElement.dataset.dealerMode='true';
@@ -76,9 +76,10 @@
     if(nextBtn)nextBtn.onclick=e=>{e?.preventDefault?.();step(1,'button')};if(prevBtn)prevBtn.onclick=e=>{e?.preventDefault?.();step(-1,'button')};
     shell.addEventListener('wheel',e=>{e.preventDefault();e.stopImmediatePropagation();const now=performance.now();if(now-lastWheel<680)return;lastWheel=now;step((Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY)>=0?1:-1,'wheel')},{capture:true,passive:false});
     shell.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();e.stopImmediatePropagation();step(e.key==='ArrowRight'?1:-1,'keyboard')}},{capture:true});
+    stage.addEventListener('click',e=>{if(performance.now()<suppressClickUntil){e.preventDefault();e.stopImmediatePropagation()}},{capture:true});
     shell.addEventListener('pointerdown',e=>{if(busy)return;drag=true;dragX=e.clientX;dragProgress=progress;shell.setPointerCapture?.(e.pointerId);e.stopImmediatePropagation()},{capture:true});
     shell.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-dragX,denom=shell.clientWidth*(innerWidth<620?.77:.66);progress=dragProgress-dx/denom;renderTrack();e.stopImmediatePropagation()},{capture:true});
-    const end=e=>{if(!drag)return;drag=false;const dx=e.clientX-dragX;progress=dragProgress;renderTrack();e.stopImmediatePropagation();if(Math.abs(dx)>42)step(dx<0?1:-1,'drag');else enforce(180)};
+    const end=e=>{if(!drag)return;drag=false;const dx=e.clientX-dragX;progress=dragProgress;renderTrack();e.stopImmediatePropagation();if(Math.abs(dx)>42){suppressClickUntil=performance.now()+750;step(dx<0?1:-1,'drag')}else enforce(180)};
     shell.addEventListener('pointerup',end,{capture:true});shell.addEventListener('pointercancel',end,{capture:true});
     addEventListener('resize',()=>{renderTrack();updateDecor()});
   }
