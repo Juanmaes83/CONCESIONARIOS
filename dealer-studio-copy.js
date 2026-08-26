@@ -32,8 +32,19 @@
     labelFor('visit.kicker','Showroom · Kicker ');labelFor('visit.title','Showroom · Headline ');labelFor('visit.cta','Test-drive CTA ');labelFor('visit.bookingUrl','Test-drive booking URL ');
     labelFor('visit.addressLabel','Showroom label ');labelFor('visit.address','Showroom address ');labelFor('visit.serviceLabel','Opening-hours label ');labelFor('visit.service','Opening hours ');labelFor('visit.contactLabel','Contact label ');labelFor('visit.contact','Sales contact ');
 
-    set('section.studio-panel[data-panel="project"] .panel-intro .eyebrow','07 · Project');set('section.studio-panel[data-panel="project"] .panel-intro h3','Project state and portability');set('section.studio-panel[data-panel="project"] .panel-intro p:nth-of-type(2)','Save, restore, preview and export the complete NOVA Motors dealership configuration.');
-    set('section.studio-panel[data-panel="project"] .project-card:last-child h4','Restore NOVA Motors demo');set('section.studio-panel[data-panel="project"] .project-card:last-child p','Remove local project/media and restore the six-vehicle NOVA Motors demo.');
+    const project=$('section.studio-panel[data-panel="project"]');if(project){
+      const intro=project.querySelector('.panel-intro');const eyebrow=intro?.querySelector('.eyebrow'),h3=intro?.querySelector('h3'),p=intro?.querySelector('p:nth-of-type(2)');
+      if(eyebrow)eyebrow.textContent='07 · Project';if(h3)h3.textContent='Project state and portability';if(p)p.textContent='Save, restore, preview and export the complete NOVA Motors dealership configuration.';
+      const cards=[...project.querySelectorAll('.project-card')];
+      const projectCopy=[
+        ['Project history','Undo and redo changes made during this editing session.'],
+        ['Portable dealership configuration','Export or import brand, vehicle collection, media, motion and showroom settings.'],
+        ['Restore NOVA Motors demo','Remove local project/media and restore the six-vehicle NOVA Motors demo.']
+      ];
+      cards.forEach((card,i)=>{const c=projectCopy[i];if(!c)return;const title=card.querySelector('h4'),body=card.querySelector('p');if(title)title.textContent=c[0];if(body)body.textContent=c[1]});
+      const exportBtn=project.querySelector('#project-export');if(exportBtn)exportBtn.textContent='Export JSON';
+      const importBtn=project.querySelector('label[for="project-import"], .project-import-label');if(importBtn&&importBtn.childNodes.length)textNode(importBtn,'Import JSON ');
+    }
 
     const motion=$('section.studio-panel[data-panel="motion"]');if(motion){
       const intro=motion.querySelector('.panel-intro');const introH=intro?.querySelector('h3'),introP=intro?.querySelector('p:nth-of-type(2)');if(introH&&introH.textContent!=='Vehicle motion direction')introH.textContent='Vehicle motion direction';if(introP&&introP.textContent!=='Choose a designed motion language for the vehicle collection without exposing technical animation parameters.')introP.textContent='Choose a designed motion language for the vehicle collection without exposing technical animation parameters.';
