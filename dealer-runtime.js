@@ -5,7 +5,7 @@
   'use strict';
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const CHOREO={anticipation:.09,travel:.50,brake:.22,settle:.22,editorial:.22,total:1.25};
+  const CHOREO={anticipation:.09,travel:.50,brake:.22,overshootHold:.14,settle:.18,editorial:.22,total:1.20};
   const HOTSPOT={
     'vehicle-01':{x:.16,y:.30},'vehicle-02':{x:.18,y:.28},'vehicle-03':{x:.18,y:.29},
     'vehicle-04':{x:.15,y:.28},'vehicle-05':{x:.12,y:.25},'vehicle-06':{x:.12,y:.27}
@@ -115,12 +115,12 @@
       setProgressVisual(fromIndex,toIndex,state.editorial);
       const hotIndex=state.transfer<.56?fromIndex:toIndex;positionHotspot(hotIndex,Math.max(.08,Math.abs(state.transfer-.5)*2));
     },onComplete(){
-      /* Donor state sync happens only after NOVA has completed the physical choreography.
-         This prevents the restaurant engine from resetting transforms mid-transition. */
       nativeStep(dir);
       progress=target;renderTrack(progress,{transfer:1,velocity:0});setCopy(toIndex);updateEditorial(toIndex,true);finish()
     }});
 
+    const brakeEnd=CHOREO.anticipation+CHOREO.travel+CHOREO.brake;
+    const settleStart=brakeEnd+CHOREO.overshootHold;
     timeline
       .to(state,{p:anticipate,velocity:dir*.18,transfer:.05,duration:CHOREO.anticipation,ease:'power2.in',onStart(){phase='anticipation';document.documentElement.dataset.vehicleMotionPhase=phase}},0)
       .to(state,{p:target-dir*.12,velocity:dir,transfer:.70,duration:CHOREO.travel,ease:'power3.inOut',onStart(){phase='travel';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation)
@@ -128,12 +128,13 @@
       .to(copy,{opacity:0,y:8,duration:.13,ease:'power2.in',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel*.72)
       .to(state,{p:overshoot,velocity:dir*.30,transfer:1,duration:CHOREO.brake,ease:'power4.out',onStart(){phase='brake';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel)
       .call(()=>setCopy(toIndex),[],CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.75)
-      .to(state,{p:target,velocity:0,transfer:1,duration:CHOREO.settle,ease:'power3.out',onStart(){phase='settle';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel+CHOREO.brake)
+      .to(state,{p:overshoot,velocity:0,transfer:1,duration:CHOREO.overshootHold,ease:'none',onStart(){phase='overshoot';document.documentElement.dataset.vehicleMotionPhase=phase}},brakeEnd)
+      .to(state,{p:target,velocity:0,transfer:1,duration:CHOREO.settle,ease:'power3.out',onStart(){phase='settle';document.documentElement.dataset.vehicleMotionPhase=phase}},settleStart)
       .to(gc,{x:-dir*42,opacity:0,scale:1.035,duration:.22,ease:'power2.in',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.28)
       .to(gn,{x:0,opacity:1,scale:1,duration:.34,ease:'power3.out',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.55)
       .to(state,{editorial:1,duration:CHOREO.editorial,ease:'power2.out',onStart(){phase='editorial';document.documentElement.dataset.vehicleMotionPhase=phase}},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.72)
       .to(copy,{opacity:1,y:0,duration:.28,ease:'power3.out',overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake*.82)
-      .to(hot,{scale:1.08,duration:.12,ease:'power2.out',yoyo:true,repeat:1,overwrite:'auto'},CHOREO.anticipation+CHOREO.travel+CHOREO.brake+CHOREO.settle*.40);
+      .to(hot,{scale:1.08,duration:.08,ease:'power2.out',yoyo:true,repeat:1,overwrite:'auto'},settleStart+CHOREO.settle*.20);
   }
 
   function finish(){phase='hold';document.documentElement.dataset.vehicleMotionPhase='hold';setTimeout(()=>{busy=false;phase='idle';document.documentElement.dataset.vehicleMotionPhase='idle';copy?.removeAttribute('data-transitioning');positionHotspot(currentIndex(),1);enforce(500)},reduced?0:90)}
