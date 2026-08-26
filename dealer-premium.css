@@ -2,6 +2,11 @@
 :root{--dealer-paper:#f2f0eb;--dealer-ink:#11110f;--dealer-line:rgba(17,17,15,.16);--dealer-muted:rgba(17,17,15,.58)}
 html[data-dealer-mode="true"] body{background:var(--dealer-paper)}
 html[data-dealer-mode="true"] .topbar{mix-blend-mode:normal}
+html[data-dealer-mode="true"] .hero{background:#0a0a09}
+html[data-dealer-mode="true"] .hero-media{background:radial-gradient(circle at 72% 54%,rgba(255,255,255,.08),transparent 32%),linear-gradient(135deg,#171715,#070707)!important}
+html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{object-fit:contain!important;object-position:72% 56%!important;width:66%!important;left:34%!important;filter:drop-shadow(0 45px 38px rgba(0,0,0,.42))}
+html[data-dealer-mode="true"] .produce-media,html[data-dealer-mode="true"] .wide-image,html[data-dealer-mode="true"] .chef-image{background:linear-gradient(145deg,#eceae4,#d9d6ce);overflow:hidden}
+html[data-dealer-mode="true"] [data-media-host="origin"] .section-media-element,html[data-dealer-mode="true"] [data-media-host="atmosphere"] .section-media-element,html[data-dealer-mode="true"] [data-media-host="chef"] .section-media-element{object-fit:contain!important;padding:6%;filter:drop-shadow(0 30px 26px rgba(0,0,0,.18))}
 html[data-dealer-mode="true"] .orbital-section{position:relative;min-height:100vh;background:var(--dealer-paper);color:var(--dealer-ink);overflow:hidden;padding-bottom:5rem}
 html[data-dealer-mode="true"] .orbital-section::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.5),transparent 42%),radial-gradient(circle at 50% 62%,rgba(255,255,255,.65),transparent 42%);pointer-events:none}
 html[data-dealer-mode="true"] .orbital-top{position:relative;z-index:15;color:var(--dealer-ink)}
@@ -31,10 +36,9 @@ html[data-dealer-mode="true"] .orbit-controls .circle-btn{color:var(--dealer-ink
 .dealer-progress button[aria-current="true"]{width:74px;background:var(--dealer-ink)}
 html[data-dealer-mode="true"] .detail-copy h4{font-family:DM Sans,sans-serif;text-transform:uppercase;letter-spacing:.15em;font-size:.68rem;color:rgba(255,255,255,.48)}
 html[data-dealer-mode="true"] .detail-reserve{background:var(--accent);color:#111}
-/* Dealer Studio keeps the donor controls and persistence, changing only vocabulary and visual emphasis. */
 html[data-dealer-mode="true"] .studio{--studio-accent:var(--accent)}
 html[data-dealer-mode="true"] .studio-titleline small{letter-spacing:.14em}
 html[data-dealer-mode="true"] .studio-nav button[data-panel="dishes"]::after{content:" VEHICLES";font-size:.56rem;opacity:.45;margin-left:.25rem}
-@media(max-width:900px){html[data-dealer-mode="true"] .orbit-shell{height:52vh;min-height:390px}html[data-dealer-mode="true"] .orbit-dish{width:min(76vw,720px)!important;height:min(48vw,440px)!important}.dealer-hotspot{left:70%;top:51%}.dealer-progress{right:1.4rem;bottom:3rem}}
-@media(max-width:620px){html[data-dealer-mode="true"] .orbital-section{min-height:92vh}html[data-dealer-mode="true"] .orbit-shell{height:44vh;min-height:320px}html[data-dealer-mode="true"] .orbit-dish{width:88vw!important;height:58vw!important;top:52%!important}.dealer-ghost-index{font-size:58vw;top:45%}.dealer-hotspot{width:44px;height:44px;left:73%;top:46%}.dealer-hotspot span{display:none}.dealer-progress{bottom:2rem}.dish-copy{padding-right:1rem}}
+@media(max-width:900px){html[data-dealer-mode="true"] .orbit-shell{height:52vh;min-height:390px}html[data-dealer-mode="true"] .orbit-dish{width:min(76vw,720px)!important;height:min(48vw,440px)!important}.dealer-hotspot{left:70%;top:51%}.dealer-progress{right:1.4rem;bottom:3rem}html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{width:76%!important;left:24%!important}}
+@media(max-width:620px){html[data-dealer-mode="true"] .orbital-section{min-height:92vh}html[data-dealer-mode="true"] .orbit-shell{height:44vh;min-height:320px}html[data-dealer-mode="true"] .orbit-dish{width:88vw!important;height:58vw!important;top:52%!important}.dealer-ghost-index{font-size:58vw;top:45%}.dealer-hotspot{width:44px;height:44px;left:73%;top:46%}.dealer-hotspot span{display:none}.dealer-progress{bottom:2rem}.dish-copy{padding-right:1rem}html[data-dealer-mode="true"] [data-media-host="hero"] .section-media-element{width:100%!important;left:0!important;opacity:.62}}
 @media(prefers-reduced-motion:reduce){.dealer-hotspot,.dealer-progress button,html[data-dealer-mode="true"] .dish-copy{transition:none!important}}
